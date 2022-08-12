@@ -1,0 +1,54 @@
+<div class="char my-4">
+	<div
+		class="flex flex-row hover:bg-slate-200 cursor-pointer"
+		(click)="goToDetails()"
+	>
+		<img
+			src="{{ character.img }}"
+			width="200"
+			height="150"
+			alt="{{ character.name }}"
+			class="rounded"
+		/>
+		<div class="minimalInCard flex items-center justify-center">
+			{{ character.name }}
+		</div>
+		<div
+			*ngIf="filter.birthday.enabled"
+			class="minimalInCard flex items-center justify-center"
+		>
+			{{ character.birthday }}
+		</div>
+		<div
+			*ngIf="filter.nickname.enabled"
+			class="minimalInCard flex items-center justify-center"
+		>
+			{{ character.nickname }}
+		</div>
+		<div
+			*ngIf="filter.occupation.enabled"
+			class="minimalInCard flex items-center justify-center"
+		>
+			<ul>
+				<li
+					class="text-center"
+					*ngFor="let work of character.occupation"
+				>
+					{{ work }}
+				</li>
+			</ul>
+		</div>
+		<div
+			*ngIf="filter.portrayed.enabled"
+			class="minimalInCard flex items-center justify-center"
+		>
+			{{ character.portrayed }}
+		</div>
+		<div
+			*ngIf="filter.status.enabled"
+			class="minimalInCard flex items-center justify-center"
+		>
+			{{ character.status }}
+		</div>
+	</div>
+</div>

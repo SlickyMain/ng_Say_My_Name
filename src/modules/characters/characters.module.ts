@@ -1,0 +1,16 @@
+import { NgModule } from '@angular/core';
+import { CommonModule } from '@angular/common';
+import { HttpClientModule } from "@angular/common/http";
+import { FormsModule } from "@angular/forms";
+import { SingleCharacterComponent } from "./components/singleCharacter/singleCharacter.component";
+import { CharactersComponent } from "./characters.component";
+import { CharactersFilterPipePipe } from "src/pipes/charactersFilterPipe.pipe";
+import { CharacterDetailsComponent } from "./pages/characterDetails/characterDetails.component";
+
+@NgModule({
+  imports: [
+    CommonModule, HttpClientModule, FormsModule
+  ],
+  declarations: [CharactersFilterPipePipe, CharactersComponent, SingleCharacterComponent, CharacterDetailsComponent]
+})
+export class CharactersModule { }

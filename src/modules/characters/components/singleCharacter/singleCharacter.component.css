@@ -1,0 +1,14 @@
+.minimalWidth {
+    min-width: 300px;
+    min-height: 214px;
+}
+
+.minimalInCard {
+    min-width: 200px;
+}
+
+@media screen and (min-width: 1500px) {
+    .char {
+        padding-left: 80px;
+    }
+}

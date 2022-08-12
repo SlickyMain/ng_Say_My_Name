@@ -1,0 +1,26 @@
+.mainCont {
+    height: calc(100vh - 140px);
+}
+
+.getBuisButton {
+    height: fit-content;
+    width: fit-content;
+    border-radius: 7px;
+    padding: 50px;
+    font-size: 32px;
+    color: white;
+}
+
+.min200px {
+    min-width: 200px;
+}
+
+.min150px {
+    min-width: 60px;
+}
+
+@media screen and (min-width: 1400px) {
+    .contentHere {
+        align-items: center;
+    }
+}

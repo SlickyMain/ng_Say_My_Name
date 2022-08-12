@@ -1,0 +1,69 @@
+<div class="w-full mt-4 flex justify-center">
+	<div class="w-full mt-4 flex justify-center">
+		<input
+			type="text"
+			class="border mb-2 mr-4 py-2 px-4 w-6/12"
+			placeholder="Поиск персонажа"
+			[(ngModel)]="queryName"
+		/>
+	</div>
+</div>
+<div class="w-full flex flex-col items-center justify-center mb-4">
+	<button
+		[ngClass]="{ 'rounded-b-none': filtersOpen }"
+		class="w-9/12 mt-4 flex justify-center bg-blue-400 hover:bg-blue-800 rounded p-3 text-white"
+		(click)="filtersOpen = !filtersOpen"
+	>
+		<p>Настроить отображение</p>
+	</button>
+	<div
+		*ngIf="filtersOpen"
+		class="w-9/12 flex flex-row flex-wrap justify-center items-center border mb-4 py-3 rounded rounded-t-none"
+	>
+		<label
+			*ngFor="let field of filters | keyvalue"
+			class="mr-4 flex justify-center items-center"
+		>
+			{{ field.value.text }}
+			<input
+				class="ml-1"
+				type="checkbox"
+				[(ngModel)]="filters[field.key].enabled"
+			/>
+		</label>
+		<button
+			class="flex justify-center bg-blue-400 hover:bg-blue-800 rounded p-3 text-white"
+			(click)="markAll(true)"
+		>
+			Отметить все
+		</button>
+		<button
+			class="flex justify-center bg-blue-400 hover:bg-blue-800 rounded p-3 text-white ml-3"
+			(click)="markAll(false)"
+		>
+			Снять все
+		</button>
+	</div>
+</div>
+<div class="flex flex-col justify-center items-start overflow-x-scroll contentHere">
+	<div class="flex flex-row">
+		<div class="min200px text-center">Картинка</div>
+		<div class="min200px text-center">Имя</div>
+		<ng-container *ngFor="let field of filters | keyvalue">
+			<div
+				*ngIf="field.value.enabled"
+				class="min200px text-center"
+			>
+				{{ field.value.text }}
+			</div>
+		</ng-container>
+	</div>
+	<div *ngIf="characters$ | async as heroes" class="">
+		<app-singleCharacter
+			*ngFor="let character of heroes | charactersFilterPipe: queryName"
+			[character]="character"
+			[filter]="filters"
+		>
+		</app-singleCharacter>
+	</div>
+</div>

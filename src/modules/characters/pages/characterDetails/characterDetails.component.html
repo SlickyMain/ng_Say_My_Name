@@ -1,0 +1,30 @@
+<div class="text-center text-5xl font-bold my-3">{{ character.name }}</div>
+<div class="grid mt-5 myGrid">
+	<div class="flex justify-center items-center">
+		<img
+			src="{{ character.img }}"
+			width="500"
+			height="500"
+			alt="{{ character.name }}"
+			class="rounded"
+		/>
+	</div>
+	<div class="text-2xl flex flex-col justify-center gap-10 willMoved">
+		<div>
+			Персонаж появлялся в следующих сезонах: {{ character.appearance }}
+		</div>
+		<div>Родился(-ась): {{ character.birthday }}</div>
+		<div>Прозвище: {{ character.nickname }}</div>
+		<div>Род занятий: {{ character.occupation }}</div>
+		<div>Статус: {{ character.status }}</div>
+		<div>Сыграл(-а): {{ character.portrayed }}</div>
+		<div class="flex flex-wrap">
+			Теги:
+			<div *ngFor="let tag of tags">
+				{{ tag }}
+			</div>
+			<div class="bg-green-700 rounded-full ml-5 px-2.5 pb-1">+</div>
+		</div>
+		<!-- <input type="text" placeholder="Add new tag" class="border border-green-600 rounded w-6/12" > -->
+	</div>
+</div>
