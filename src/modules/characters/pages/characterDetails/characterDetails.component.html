@@ -1,3 +1,4 @@
+<ng-template appRef></ng-template>
 <div class="text-center text-5xl font-bold my-3">{{ character.name }}</div>
 <div class="grid mt-5 myGrid">
 	<div class="flex justify-center items-center">
@@ -18,13 +19,27 @@
 		<div>Род занятий: {{ character.occupation }}</div>
 		<div>Статус: {{ character.status }}</div>
 		<div>Сыграл(-а): {{ character.portrayed }}</div>
-		<div class="flex flex-wrap">
+		<div class="flex flex-wrap items-center addGap">
 			Теги:
 			<div *ngFor="let tag of tags">
-				{{ tag }}
+				<div class="mx-2 px-2 tagged">
+					{{ tag }}
+					<button (click)="deleteTag(tag)">
+						<img
+							src="../../../../assets/cross.png"
+							width="40"
+							height="40"
+							alt="Удалить"
+						/>
+					</button>
+				</div>
 			</div>
-			<div class="bg-green-700 rounded-full ml-5 px-2.5 pb-1">+</div>
+			<button
+				(click)="showModal()"
+				class="plusButton rounded-full ml-5 px-2.5 pb-1"
+			>
+				+
+			</button>
 		</div>
-		<!-- <input type="text" placeholder="Add new tag" class="border border-green-600 rounded w-6/12" > -->
 	</div>
 </div>

@@ -6,11 +6,12 @@ import { SingleCharacterComponent } from "./components/singleCharacter/singleCha
 import { CharactersComponent } from "./characters.component";
 import { CharactersFilterPipePipe } from "src/pipes/charactersFilterPipe.pipe";
 import { CharacterDetailsComponent } from "./pages/characterDetails/characterDetails.component";
+import { RefDirective } from "src/directives/Ref.directive";
 
 @NgModule({
   imports: [
     CommonModule, HttpClientModule, FormsModule
   ],
-  declarations: [CharactersFilterPipePipe, CharactersComponent, SingleCharacterComponent, CharacterDetailsComponent]
+  declarations: [CharactersFilterPipePipe, CharactersComponent, SingleCharacterComponent, CharacterDetailsComponent, RefDirective]
 })
 export class CharactersModule { }

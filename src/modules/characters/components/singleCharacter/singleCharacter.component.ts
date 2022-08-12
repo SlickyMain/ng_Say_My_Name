@@ -17,6 +17,7 @@ export class SingleCharacterComponent implements OnInit {
 	goToDetails() {
 		this.router.navigate(["/person", this.character.char_id], {
 			queryParams: {
+				"char_id": this.character.char_id,
 				"appearance": this.character.appearance,
 				"birthday": this.character.birthday,
 				"img": this.character.img,
