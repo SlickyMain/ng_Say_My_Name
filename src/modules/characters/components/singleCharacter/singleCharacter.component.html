@@ -1,4 +1,4 @@
-<div class="char my-4">
+<div class="my-4">
 	<div
 		class="flex flex-row hover:bg-slate-200 cursor-pointer"
 		(click)="goToDetails()"
@@ -10,18 +10,18 @@
 			alt="{{ character.name }}"
 			class="rounded"
 		/>
-		<div class="minimalInCard flex items-center justify-center">
+		<div class="minimalInCard flex items-center justify-center limitWidthForCells">
 			{{ character.name }}
 		</div>
 		<div
 			*ngIf="filter.birthday.enabled"
-			class="minimalInCard flex items-center justify-center"
+			class="minimalInCard flex items-center justify-center limitWidthForCells"
 		>
 			{{ character.birthday }}
 		</div>
 		<div
 			*ngIf="filter.nickname.enabled"
-			class="minimalInCard flex items-center justify-center"
+			class="minimalInCard flex items-center justify-center limitWidthForCells"
 		>
 			{{ character.nickname }}
 		</div>
@@ -31,22 +31,22 @@
 		>
 			<ul>
 				<li
-					class="text-center"
-					*ngFor="let work of character.occupation"
+					class="text-center limitWidthForCells"
+					*ngFor="let work of character.occupation; let isLast=last"
 				>
-					{{ work }}
+					{{ work }}{{isLast ? "" : ", "}}
 				</li>
 			</ul>
 		</div>
 		<div
 			*ngIf="filter.portrayed.enabled"
-			class="minimalInCard flex items-center justify-center"
+			class="minimalInCard flex items-center justify-center limitWidthForCells"
 		>
 			{{ character.portrayed }}
 		</div>
 		<div
 			*ngIf="filter.status.enabled"
-			class="minimalInCard flex items-center justify-center"
+			class="minimalInCard flex items-center justify-center limitWidthForCells"
 		>
 			{{ character.status }}
 		</div>

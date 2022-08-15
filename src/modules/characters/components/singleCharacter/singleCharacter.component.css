@@ -7,8 +7,12 @@
     min-width: 200px;
 }
 
-@media screen and (min-width: 1500px) {
-    .char {
-        padding-left: 10px;
+.limitWidthForCells {
+    max-width: 10vw;
+}
+
+@media screen and (max-width: 900px) {
+    .limitWidthForCells {
+        max-width: 20vw;
     }
 }

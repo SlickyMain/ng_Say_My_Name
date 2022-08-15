@@ -12,11 +12,11 @@
 	</div>
 	<div class="text-2xl flex flex-col justify-center gap-10 willMoved">
 		<div>
-			Персонаж появлялся в следующих сезонах: {{ character.appearance }}
+			Персонаж появлялся в следующих сезонах: {{ character.appearance.join(", ") }}
 		</div>
 		<div>Родился(-ась): {{ character.birthday }}</div>
 		<div>Прозвище: {{ character.nickname }}</div>
-		<div>Род занятий: {{ character.occupation }}</div>
+		<div>Род занятий: {{ character.occupation.join(",  ") }}</div>
 		<div>Статус: {{ character.status }}</div>
 		<div>Сыграл(-а): {{ character.portrayed }}</div>
 		<div class="flex flex-wrap items-center addGap">
