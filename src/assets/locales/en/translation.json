@@ -1,0 +1,9 @@
+{ 
+    "image": "Image",
+    "name": "Name",
+    "birthday": "Birthday",
+    "nickname": "Nickname",
+    "occupation": "Occupation",
+    "portrayed": "Portrayed",
+    "status": "Status"
+}

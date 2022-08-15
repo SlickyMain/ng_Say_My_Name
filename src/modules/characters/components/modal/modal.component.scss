@@ -1,11 +1,11 @@
 @function get-vw($target) {
 	$vw-context: (1000 * 0.01) * 1px;
-	@return ($target/$vw-context) * 1vw;
+	@return calc($target/$vw-context) * 1vw;
 }
 
 @function get-vh($target) {
 	$vh-context: (1000 * 0.01) * 1px;
-	@return ($target/$vh-context) * 1vh;
+	@return calc($target/$vh-context) * 1vh;
 }
 
 .back {

@@ -24,7 +24,7 @@
 			*ngFor="let field of filters | keyvalue"
 			class="mr-4 flex justify-center items-center"
 		>
-			{{ field.value.text }}
+			{{ field.value.text | i18next }}
 			<input
 				class="ml-1"
 				type="checkbox"
@@ -45,16 +45,15 @@
 		</button>
 	</div>
 </div>
-<div class="flex flex-col justify-center items-start overflow-x-scroll contentHere">
+<div
+	class="flex flex-col justify-center items-start overflow-x-scroll contentHere"
+>
 	<div class="flex flex-row">
-		<div class="min200px text-center">Картинка</div>
-		<div class="min200px text-center">Имя</div>
+		<div class="min200px text-center">{{ "image" | i18next }}</div>
+		<div class="min200px text-center">{{ "name" | i18next }}</div>
 		<ng-container *ngFor="let field of filters | keyvalue">
-			<div
-				*ngIf="field.value.enabled"
-				class="min200px text-center"
-			>
-				{{ field.value.text }}
+			<div *ngIf="field.value.enabled" class="min200px text-center">
+				{{ field.value.text | i18next }}
 			</div>
 		</ng-container>
 	</div>

@@ -15,23 +15,23 @@ export class CharactersComponent implements OnInit {
 			? JSON.parse(savedFilter)
 			: {
 					birthday: {
-						text: "День рождения",
+						text: "birthday",
 						enabled: true,
 					},
 					nickname: {
-						text: "Прозвище",
+						text: "nickname",
 						enabled: true,
 					},
 					occupation: {
-						text: "Деятельность",
+						text: "occupation",
 						enabled: true,
 					},
 					status: {
-						text: "Статус",
+						text: "status",
 						enabled: true,
 					},
 					portrayed: {
-						text: "Актер",
+						text: "portrayed",
 						enabled: true,
 					}
 			  };
@@ -47,7 +47,7 @@ export class CharactersComponent implements OnInit {
 
 	queryName = ""
 
-	markAll(turn = true) {
+	markAll(turn = true) { 
 		for (let field in this.filters) {
 			this.filters[field].enabled = turn
 		}
