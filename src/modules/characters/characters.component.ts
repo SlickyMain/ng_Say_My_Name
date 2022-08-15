@@ -43,6 +43,8 @@ export class CharactersComponent implements OnInit {
 
 	filters: IFilter;
 
+	page = 1
+
 	foundCharacters: ICharacter[] = []
 
 	queryName = ""

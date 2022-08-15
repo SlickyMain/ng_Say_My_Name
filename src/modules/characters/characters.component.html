@@ -2,7 +2,7 @@
 	<div class="w-full mt-4 flex justify-center">
 		<input
 			type="text"
-			class="border mb-2 mr-4 py-2 px-4 w-6/12"
+			class="border mb-2 py-2 px-4 w-6/12"
 			placeholder="Поиск персонажа"
 			[(ngModel)]="queryName"
 		/>
@@ -46,9 +46,9 @@
 	</div>
 </div>
 <div
-	class="flex flex-col justify-center items-start overflow-x-scroll contentHere"
+	class="flex flex-col justify-center items-start overflow-scroll contentHere"
 >
-	<div class="flex flex-row">
+	<div class="flex flex-row sticky">
 		<div class="min200px text-center">{{ "image" | i18next }}</div>
 		<div class="min200px text-center">{{ "name" | i18next }}</div>
 		<ng-container *ngFor="let field of filters | keyvalue">
@@ -57,12 +57,19 @@
 			</div>
 		</ng-container>
 	</div>
-	<div *ngIf="characters$ | async as heroes" class="">
+	<div *ngIf="characters$ | async as heroes" class="andHere">
 		<app-singleCharacter
-			*ngFor="let character of heroes | charactersFilterPipe: queryName"
+			*ngFor="
+				let character of heroes
+					| charactersFilterPipe: queryName
+					| paginate: { itemsPerPage: 10, currentPage: page }
+			"
 			[character]="character"
 			[filter]="filters"
 		>
 		</app-singleCharacter>
 	</div>
+</div>
+<div class="flex items-center justify-center">
+	<pagination-controls (pageChange)="page = $event"></pagination-controls>
 </div>

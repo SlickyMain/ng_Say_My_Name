@@ -9,6 +9,10 @@ import { CharacterDetailsComponent } from "./pages/characterDetails/characterDet
 import { RefDirective } from "src/directives/Ref.directive";
 import { I18NextModule } from "angular-i18next";
 import { NgxPaginationModule } from "ngx-pagination";
+import { registerLocaleData } from "@angular/common";
+import localeRu from "@angular/common/locales/ru"
+
+registerLocaleData(localeRu)
 
 @NgModule({
 	imports: [
