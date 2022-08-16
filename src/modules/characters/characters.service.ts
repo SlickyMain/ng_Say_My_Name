@@ -14,4 +14,10 @@ export class CharacterService {
 			"https://www.breakingbadapi.com/api/characters",
 		);
 	}
+
+	getCharacterById(id: string): Observable<ICharacter> {
+		return this.fetch.get<ICharacter>(
+			`https://www.breakingbadapi.com/api/characters/${id}`,
+		);
+	}
 }

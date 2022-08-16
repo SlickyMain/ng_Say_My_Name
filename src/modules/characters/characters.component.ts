@@ -1,4 +1,4 @@
-import { Component, OnInit } from "@angular/core";
+import { ChangeDetectionStrategy, Component, OnInit } from "@angular/core";
 import { Observable } from "rxjs";
 import { ICharacter, IFilter } from "src/models/character";
 import { CharacterService } from "./characters.service";
@@ -7,6 +7,7 @@ import { CharacterService } from "./characters.service";
 	selector: "app-search",
 	templateUrl: "./characters.component.html",
 	styleUrls: ["./characters.component.css"],
+	changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class CharactersComponent implements OnInit {
 	constructor(private characterService: CharacterService) {

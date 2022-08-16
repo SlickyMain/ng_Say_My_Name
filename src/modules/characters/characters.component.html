@@ -1,17 +1,17 @@
-<div class="w-full mt-4 flex justify-center">
-	<div class="w-full mt-4 flex justify-center">
+<div class="w-full mt-1 flex justify-center">
+	<div class="w-full mt-1 flex justify-center">
 		<input
 			type="text"
-			class="border mb-2 py-2 px-4 w-6/12"
+			class="border py-1 px-2 w-6/12"
 			placeholder="Поиск персонажа"
 			[(ngModel)]="queryName"
 		/>
 	</div>
 </div>
-<div class="w-full flex flex-col items-center justify-center mb-4">
+<div class="w-full flex flex-col items-center justify-center mb-1">
 	<button
 		[ngClass]="{ 'rounded-b-none': filtersOpen }"
-		class="w-9/12 mt-4 flex justify-center bg-blue-400 hover:bg-blue-800 rounded p-3 text-white"
+		class="w-9/12 mt-4 flex justify-center bg-blue-400 hover:bg-blue-800 rounded px-3 py-1.5 text-white"
 		(click)="filtersOpen = !filtersOpen"
 	>
 		<p>Настроить отображение</p>
@@ -48,12 +48,12 @@
 <div
 	class="flex flex-col justify-center items-start overflow-scroll contentHere"
 >
-	<div class="flex flex-row sticky">
-		<div class="min200px text-center">{{ "image" | i18next }}</div>
-		<div class="min200px text-center">{{ "name" | i18next }}</div>
+	<div class="flex flex-row namesOfCells">
+		<div class="min200px text-center">{{ "image" | i18nextEager }}</div>
+		<div class="min200px text-center">{{ "name" | i18nextEager }}</div>
 		<ng-container *ngFor="let field of filters | keyvalue">
 			<div *ngIf="field.value.enabled" class="min200px text-center">
-				{{ field.value.text | i18next }}
+				{{ field.value.text | i18nextEager }}
 			</div>
 		</ng-container>
 	</div>

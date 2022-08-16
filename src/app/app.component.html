@@ -1,4 +1,68 @@
 <div>
-	<h2 class="text-center text-3xl bg-blue-500 text-white w-full">Bored</h2>
+	<div class="flex justify-between px-5 items-center pt-2 relative">
+		<nav class="flex gap-2">
+			<a
+				class="bg-sky-500 rounded py-2 px-3 text-white"
+				routerLinkActive="activeLink"
+				ariaCurrentWhenActive="page"
+				[routerLinkActiveOptions]="{ exact: true }"
+				routerLink="/"
+				>Main page</a
+			>
+			<a
+				class="bg-sky-500 rounded py-2 px-3 text-white"
+				routerLinkActive="activeLink"
+				ariaCurrentWhenActive="page"
+				[routerLinkActiveOptions]="{ exact: true }"
+				routerLink="/favorite"
+				>Favorite heroes</a
+			>
+		</nav>
+		<button
+			(click)="isMenuOpen = !isMenuOpen"
+			[ngClass]="{ noBurger: viewWidth > 900 }"
+		>
+			<img
+				src="../assets/burger.png"
+				width="45"
+				height="45"
+				alt="Close"
+			/>
+		</button>
+		<div
+			[ngClass]="{
+				hideSwitcher: viewWidth < 900,
+				showSwitcher: viewWidth < 900 && isMenuOpen
+			}"
+			class="flex gap-2 relative"
+		>
+			<div
+				(click)="isMenuOpen = !isMenuOpen"
+				[ngClass]="{ noBurger: viewWidth > 900 }"
+				class="closeMenu"
+			>
+				<img
+					src="../assets/cross.png"
+					width="50"
+					height="50"
+					alt="Close"
+				/>
+			</div>
+			<button
+				[ngClass]="{ 'bg-blue-600': isRu() }"
+				(click)="setLang('ru')"
+				class="bg-sky-500 rounded py-2 px-3 text-white"
+			>
+				Русский
+			</button>
+			<button
+				[ngClass]="{ 'bg-blue-600': !isRu() }"
+				(click)="setLang('en')"
+				class="bg-sky-500 rounded py-2 px-3 text-white"
+			>
+				English
+			</button>
+		</div>
+	</div>
 	<router-outlet></router-outlet>
 </div>

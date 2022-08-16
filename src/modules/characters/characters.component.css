@@ -12,7 +12,15 @@
 }
 
 .andHere {
-    max-height: 70vh;
+    max-height: 65vh;
+}
+
+.namesOfCells {
+    position: sticky;
+    top: 0;
+    padding-bottom: 10px;
+    box-shadow: -9px 9px 20px 10px rgba(255, 255, 255, 1);
+    background-color: white;
 }
 
 .min200px {
@@ -26,5 +34,8 @@
 @media screen and (min-width: 1400px) {
     .contentHere {
         align-items: center;
+    }
+    .andHere {
+        max-height: 70vh;
     }
 }

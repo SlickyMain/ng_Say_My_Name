@@ -33,10 +33,8 @@ export function appInit(i18next: ITranslationService) {
 					loadPath: "./assets/locales/{{lng}}/{{ns}}.json",
 				},
 				detection: {
-					order: ["cookie"],
-					lookupCookie: "lang",
-					caches: ["cookie"],
-					cookieMinutes: 600000,
+					order: ["localStorage"],
+					caches: ["localStorage"],
 				},
 			});
 }
@@ -66,7 +64,7 @@ export const I18N_PROVIDERS = [
 		AppRoutingModule,
 		CharactersModule,
 		I18NextModule.forRoot(),
-		NgxPaginationModule
+		NgxPaginationModule,
 	],
 	providers: [I18N_PROVIDERS],
 	bootstrap: [AppComponent],
