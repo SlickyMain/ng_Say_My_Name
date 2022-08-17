@@ -1,26 +1,36 @@
 <ng-template appRef></ng-template>
-<div class="text-center text-5xl font-bold my-3">{{ character?.name || "" }}</div>
+<div class="text-center text-5xl font-bold my-3">
+	{{ character.name }}
+</div>
 <div class="grid mt-5 myGrid">
 	<div class="flex justify-center items-center">
 		<img
-			src="{{ character?.img }}"
+			src="{{ character.img }}"
 			width="500"
 			height="500"
-			alt="{{ character?.name }}"
+			alt="{{ character.name }}"
 			class="rounded"
 		/>
 	</div>
 	<div class="text-2xl flex flex-col justify-center gap-10 willMoved">
 		<div>
-			Персонаж появлялся в следующих сезонах: {{ character?.appearance?.length ? character.appearance.join(", ") : "" }}
+			{{ "hero.appearance" | i18nextEager
+			}}{{
+				character.appearance.length
+					? character.appearance.join(", ")
+					: ""
+			}}
 		</div>
-		<div>Родился(-ась): {{ character?.birthday }}</div>
-		<div>Прозвище: {{ character?.nickname }}</div>
-		<div>Род занятий: {{ isString(character.occupation) ? character.occupation : character.occupation.join(", ") }}</div>
-		<div>Статус: {{ character?.status }}</div>
-		<div>Сыграл(-а): {{ character?.portrayed }}</div>
+		<div>{{ "hero.born" | i18nextEager }}{{ character.birthday }}</div>
+		<div>{{ "hero.nickname" | i18nextEager }}{{ character.nickname }}</div>
+		<div>
+			{{ "hero.occupation" | i18nextEager }}
+			{{ character.occupation.join(", ") }}
+		</div>
+		<div>{{ "hero.status" | i18nextEager }}{{ character.status }}</div>
+		<div>{{ "hero.actor" | i18nextEager }}{{ character.portrayed }}</div>
 		<div class="flex flex-wrap items-center addGap">
-			Теги:
+			{{ "hero.tags" | i18nextEager }}
 			<div *ngFor="let tag of tags">
 				<div class="mx-2 px-2 tagged">
 					{{ tag }}

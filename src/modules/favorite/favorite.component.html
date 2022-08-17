@@ -1,0 +1,38 @@
+<div class="flex justify-center flex-col items-center gap-2">
+	<div class="flex flex-col relative">
+		<div
+			(click)="showFilters = !showFilters"
+			[ngClass]="{ addLightGrey: showFilters }"
+			class="flex justify-center"
+		>
+			<p class="openTagFilter">{{"select_filters" | i18nextEager}}</p>
+		</div>
+		<div *ngIf="showFilters" class="tagFilters flex flex-col">
+			<ng-container *ngFor="let field of possibleFilters | keyvalue">
+				<label
+					class="filterPoint"
+					(click)="toggleTag(field.key)"
+				>
+					<input
+						type="checkbox"
+						[(ngModel)]="possibleFilters[field.key]"
+					/>
+					{{ field.key }}
+				</label>
+			</ng-container>
+		</div>
+	</div>
+	<ng-container *ngFor="let hero of favoriteHeroes | keyvalue" >
+		<div *ngIf="checkInter(hero.value.tags)" class="m-1">
+			<a
+				[routerLink]="['/person', hero.key]"
+				class="p-2 bg-sky-400 rounded flex"
+			>
+				{{ hero.value.name }}:
+				<div class="ml-2 bg-pink-400 px-2 rounded">
+					{{ hero.value.tags.join(", ") }}
+				</div>
+			</a>
+		</div>
+	</ng-container>
+</div>

@@ -1,0 +1,29 @@
+.openTagFilter {
+    font-size: 24px;
+    padding: 0px 10px;
+}
+
+.openTagFilter::after {
+    content: "↓";
+}
+
+.addLightGrey {
+    background-color: lightgray;
+    border-top-left-radius: 5px;
+    border-top-right-radius: 5px;
+}
+
+.tagFilters {
+    position: absolute;
+    background-color: lightgrey;
+    border-bottom-left-radius: 5px;
+    border-bottom-right-radius: 5px;
+    width: 100%;
+    padding: 5px;
+    top: 30px;
+}
+
+.filterPoint {
+    font-size: 24px;
+    margin: 0px 5px;
+}

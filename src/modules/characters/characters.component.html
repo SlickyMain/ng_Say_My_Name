@@ -3,7 +3,7 @@
 		<input
 			type="text"
 			class="border py-1 px-2 w-6/12"
-			placeholder="Поиск персонажа"
+			placeholder="{{ 'search_hero_placeholder' | i18nextEager }}"
 			[(ngModel)]="queryName"
 		/>
 	</div>
@@ -14,7 +14,7 @@
 		class="w-9/12 mt-4 flex justify-center bg-blue-400 hover:bg-blue-800 rounded px-3 py-1.5 text-white"
 		(click)="filtersOpen = !filtersOpen"
 	>
-		<p>Настроить отображение</p>
+		<p>{{ "set_view" | i18nextEager }}</p>
 	</button>
 	<div
 		*ngIf="filtersOpen"
@@ -24,7 +24,7 @@
 			*ngFor="let field of filters | keyvalue"
 			class="mr-4 flex justify-center items-center"
 		>
-			{{ field.value.text | i18next }}
+			{{ field.value.text | i18nextEager }}
 			<input
 				class="ml-1"
 				type="checkbox"
@@ -35,13 +35,13 @@
 			class="flex justify-center bg-blue-400 hover:bg-blue-800 rounded p-3 text-white"
 			(click)="markAll(true)"
 		>
-			Отметить все
+			{{ "mark_all" | i18nextEager }}
 		</button>
 		<button
 			class="flex justify-center bg-blue-400 hover:bg-blue-800 rounded p-3 text-white ml-3"
 			(click)="markAll(false)"
 		>
-			Снять все
+			{{ "dismiss_all" | i18nextEager }}
 		</button>
 	</div>
 </div>

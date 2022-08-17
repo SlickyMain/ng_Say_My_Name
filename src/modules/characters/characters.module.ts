@@ -11,6 +11,7 @@ import { I18NextModule } from "angular-i18next";
 import { NgxPaginationModule } from "ngx-pagination";
 import { registerLocaleData } from "@angular/common";
 import localeRu from "@angular/common/locales/ru"
+import { ModalComponent } from "./components/modal/modal.component";
 
 registerLocaleData(localeRu)
 
@@ -28,6 +29,7 @@ registerLocaleData(localeRu)
 		SingleCharacterComponent,
 		CharacterDetailsComponent,
 		RefDirective,
+		ModalComponent
 	],
 })
 export class CharactersModule {}

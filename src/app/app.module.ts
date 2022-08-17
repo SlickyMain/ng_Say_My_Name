@@ -3,6 +3,7 @@ import { BrowserModule } from "@angular/platform-browser";
 import { AppRoutingModule } from "./app-routing.module";
 import { AppComponent } from "./app.component";
 import { CharactersModule } from "src/modules/characters/characters.module";
+import { FavoriteModule } from "src/modules/favorite/favorite.module";
 import {
 	defaultInterpolationFormat,
 	I18NextModule,
@@ -21,7 +22,7 @@ export function appInit(i18next: ITranslationService) {
 			.init({
 				supportedLngs: ["en", "ru"],
 				fallbackLng: "en",
-				debug: true,
+				debug: false,
 				returnEmptyString: false,
 				ns: ["translation"],
 				interpolation: {
@@ -65,6 +66,7 @@ export const I18N_PROVIDERS = [
 		CharactersModule,
 		I18NextModule.forRoot(),
 		NgxPaginationModule,
+		FavoriteModule
 	],
 	providers: [I18N_PROVIDERS],
 	bootstrap: [AppComponent],

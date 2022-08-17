@@ -1,7 +1,11 @@
 <div class="back">
 	<div class="modal">
-		<input type="text" #focusThis class="beInput rounded">
-		<button class="addTag" (click)="throwNewTagToParent()">Добавить</button>
-		<button class="closeWindow" (click)="isNeedToDestroy.emit(true)">Закрыть</button>
+		<input type="text" #focusThis class="beInput rounded mr-52" />
+		<button class="addTag" (click)="throwNewTagToParent()">
+			{{ "add" | i18nextEager }}
+		</button>
+		<button class="closeWindow" (click)="isNeedToDestroy.emit(true)">
+			{{ "close" | i18nextEager }}
+		</button>
 	</div>
 </div>

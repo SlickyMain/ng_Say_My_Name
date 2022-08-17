@@ -5,5 +5,23 @@
     "nickname": "Nickname",
     "occupation": "Occupation",
     "portrayed": "Portrayed",
-    "status": "Status"
+    "status": "Status",
+    "main_page": "Main page",
+    "favorite_page": "Favorite heroes",
+    "search_hero_placeholder": "Start search hero",
+    "set_view": "Set view of columns",
+    "mark_all": "Mark all",
+    "dismiss_all": "Dismiss all",
+    "hero": {
+        "appearance": "Hero appearance in next seasons: ",
+        "born": "Born: ",
+        "nickname": "Also known as: ",
+        "occupation": "Occupation: ",
+        "status": "Current status: ",
+        "actor": "Portrayed by: ",
+        "tags": "Tags"
+    },
+    "add": "Add",
+    "close": "Close",
+    "select_filters": "Aplly some filters"
 }

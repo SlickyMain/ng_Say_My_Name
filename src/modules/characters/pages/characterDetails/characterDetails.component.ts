@@ -1,19 +1,18 @@
-import { Component, OnInit, ViewChild } from "@angular/core";
+import { ChangeDetectorRef, Component, OnInit, ViewChild } from "@angular/core";
 import { ActivatedRoute } from "@angular/router";
-import { Subscription } from "rxjs";
 import { RefDirective } from "src/directives/Ref.directive";
+import { ICharacter } from "src/models/character";
+import { IFavorite } from "src/modules/favorite/favorite.component";
 import { CharacterService } from "../../characters.service";
 import { ModalComponent } from "../../components/modal/modal.component";
 
 @Component({
 	selector: "app-characterDetails",
 	templateUrl: "./characterDetails.component.html",
-	styleUrls: ["./characterDetails.component.css"],
+	styleUrls: ["./characterDetails.component.css"]
 })
 export class CharacterDetailsComponent implements OnInit {
-	private querySubscription: Subscription;
-
-	character: any;
+	character!: ICharacter
 
 	tags!: string[];
 
@@ -55,7 +54,6 @@ export class CharacterDetailsComponent implements OnInit {
 				};
 				localStorage.setItem("favor", JSON.stringify(newFavor));
 			}
-
 			component.destroy();
 		});
 	}
@@ -66,37 +64,36 @@ export class CharacterDetailsComponent implements OnInit {
 			`char${this.character.char_id}`,
 			JSON.stringify(this.tags),
 		);
+		let favor: IFavorite = JSON.parse(localStorage.getItem("favor") || "");
+		for (let field in favor) {
+			if (favor[field].tags.includes(tag)) {
+				if (favor[field].tags.length > 1) {
+					favor[field].tags.splice(favor[field].tags.indexOf(tag), 1);
+				} else {
+					delete favor[field];
+				}
+			}
+		}
+		localStorage.setItem("favor", JSON.stringify(favor));
 	}
 
 	isString(value: any): boolean {
-		return typeof value === "string" 
+		return typeof value === "string";
 	}
 
 	constructor(
 		private route: ActivatedRoute,
 		private charService: CharacterService,
 	) {
-		this.querySubscription = route.queryParams.subscribe(params => {
-			if (params.hasOwnProperty("birthday")) {
-				this.character = params;
-				let isTags = localStorage.getItem(
-					`char${this.character?.char_id}`,
-				);
-				this.tags = isTags ? JSON.parse(isTags) : [];
-			} else {
-				route.paramMap.subscribe(params => {
-					this.charService
-						.getCharacterById(params.get("id") || "")
-						.subscribe(result => {
-							this.character = result[0];
-							this.tags = JSON.parse(
-								localStorage.getItem(
-									`char${result[0].char_id}`,
-								) || "",
-							);
-						});
+		route.paramMap.subscribe(params => {
+			this.charService
+				.getCharacterById(params.get("id") || "")
+				.subscribe(result => {
+					this.character = result[0];
+					this.tags = JSON.parse(
+						localStorage.getItem(`char${result[0].char_id}`) || "",
+					);
 				});
-			}
 		});
 	}
 
