@@ -27,10 +27,6 @@ export class CharacterDetailsComponent implements OnInit {
 		});
 		component.instance.newTagEvent.subscribe((newTag: string) => {
 			this.tags.push(newTag);
-			localStorage.setItem(
-				`char${this.character.char_id}`,
-				JSON.stringify(this.tags),
-			);
 
 			// Favorite heroes
 			let selectedHeroes = localStorage.getItem("favor");
@@ -60,10 +56,6 @@ export class CharacterDetailsComponent implements OnInit {
 
 	deleteTag(tag: string) {
 		this.tags = this.tags.filter(x => x !== tag);
-		localStorage.setItem(
-			`char${this.character.char_id}`,
-			JSON.stringify(this.tags),
-		);
 		let favor: IFavorite = JSON.parse(localStorage.getItem("favor") || "");
 		for (let field in favor) {
 			if (favor[field].tags.includes(tag)) {
@@ -90,9 +82,10 @@ export class CharacterDetailsComponent implements OnInit {
 				.getCharacterById(params.get("id") || "")
 				.subscribe(result => {
 					this.character = result[0];
-					this.tags = JSON.parse(
-						localStorage.getItem(`char${result[0].char_id}`) || "",
-					);
+					let tagsExist = localStorage.getItem("favor");
+					this.tags = tagsExist
+						? JSON.parse(tagsExist)[result[0].char_id].tags
+						: [];
 				});
 		});
 	}
