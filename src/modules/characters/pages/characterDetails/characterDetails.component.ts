@@ -9,10 +9,10 @@ import { ModalComponent } from "../../components/modal/modal.component";
 @Component({
 	selector: "app-characterDetails",
 	templateUrl: "./characterDetails.component.html",
-	styleUrls: ["./characterDetails.component.css"]
+	styleUrls: ["./characterDetails.component.css"],
 })
 export class CharacterDetailsComponent implements OnInit {
-	character!: ICharacter
+	character!: ICharacter;
 
 	tags!: string[];
 

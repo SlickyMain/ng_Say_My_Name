@@ -10,10 +10,11 @@ import { RefDirective } from "src/directives/Ref.directive";
 import { I18NextModule } from "angular-i18next";
 import { NgxPaginationModule } from "ngx-pagination";
 import { registerLocaleData } from "@angular/common";
-import localeRu from "@angular/common/locales/ru"
+import localeRu from "@angular/common/locales/ru";
 import { ModalComponent } from "./components/modal/modal.component";
+import { CharactersRoutesModule } from "./characters.routing.module";
 
-registerLocaleData(localeRu)
+registerLocaleData(localeRu);
 
 @NgModule({
 	imports: [
@@ -22,6 +23,7 @@ registerLocaleData(localeRu)
 		FormsModule,
 		I18NextModule,
 		NgxPaginationModule,
+		CharactersRoutesModule
 	],
 	declarations: [
 		CharactersFilterPipePipe,
@@ -29,7 +31,7 @@ registerLocaleData(localeRu)
 		SingleCharacterComponent,
 		CharacterDetailsComponent,
 		RefDirective,
-		ModalComponent
+		ModalComponent,
 	],
 })
 export class CharactersModule {}

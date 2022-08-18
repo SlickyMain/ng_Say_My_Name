@@ -1,14 +1,22 @@
 import { NgModule } from "@angular/core";
 import { RouterModule, Routes } from "@angular/router";
-import { CharactersComponent } from "src/modules/characters/characters.component";
 import { MonkeNotFoundComponent } from "src/modules/characters/pages/monkeNotFound/monkeNotFound.component";
-import { CharacterDetailsComponent } from "src/modules/characters/pages/characterDetails/characterDetails.component";
-import { FavoriteComponent } from "src/modules/favorite/favorite.component";
 
 const routes: Routes = [
-	{ path: "", component: CharactersComponent },
-	{ path: "person/:id", component: CharacterDetailsComponent },
-	{ path: "favorite", component: FavoriteComponent },
+	{
+		path: "",
+		loadChildren: () =>
+			import("../modules/characters/characters.module").then(
+				m => m.CharactersModule,
+			),
+	},
+	{
+		path: "favorite",
+		loadChildren: () =>
+			import("../modules/favorite/favorite.module").then(
+				m => m.FavoriteModule,
+			),
+	},
 	{ path: "**", component: MonkeNotFoundComponent },
 ];
 

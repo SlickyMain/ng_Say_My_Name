@@ -2,8 +2,6 @@ import { APP_INITIALIZER, LOCALE_ID, NgModule } from "@angular/core";
 import { BrowserModule } from "@angular/platform-browser";
 import { AppRoutingModule } from "./app-routing.module";
 import { AppComponent } from "./app.component";
-import { CharactersModule } from "src/modules/characters/characters.module";
-import { FavoriteModule } from "src/modules/favorite/favorite.module";
 import {
 	defaultInterpolationFormat,
 	I18NextModule,
@@ -13,6 +11,7 @@ import {
 import LanguageDetector from "i18next-browser-languagedetector";
 import Backend from "i18next-http-backend";
 import { NgxPaginationModule } from "ngx-pagination";
+import { HttpClientModule } from "@angular/common/http";
 
 export function appInit(i18next: ITranslationService) {
 	return () =>
@@ -63,10 +62,9 @@ export const I18N_PROVIDERS = [
 	imports: [
 		BrowserModule,
 		AppRoutingModule,
-		CharactersModule,
 		I18NextModule.forRoot(),
 		NgxPaginationModule,
-		FavoriteModule
+		HttpClientModule
 	],
 	providers: [I18N_PROVIDERS],
 	bootstrap: [AppComponent],
