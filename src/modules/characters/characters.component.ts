@@ -7,7 +7,7 @@ import { CharacterService } from "./characters.service";
 	selector: "app-search",
 	templateUrl: "./characters.component.html",
 	styleUrls: ["./characters.component.css"],
-	changeDetection: ChangeDetectionStrategy.OnPush
+	changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class CharactersComponent implements OnInit {
 	constructor(private characterService: CharacterService) {
@@ -15,26 +15,11 @@ export class CharactersComponent implements OnInit {
 		this.filters = savedFilter
 			? JSON.parse(savedFilter)
 			: {
-					birthday: {
-						text: "birthday",
-						enabled: true,
-					},
-					nickname: {
-						text: "nickname",
-						enabled: true,
-					},
-					occupation: {
-						text: "occupation",
-						enabled: true,
-					},
-					status: {
-						text: "status",
-						enabled: true,
-					},
-					portrayed: {
-						text: "portrayed",
-						enabled: true,
-					}
+					birthday: true,
+					nickname: true,
+					occupation: true,
+					status: true,
+					portrayed: true,
 			  };
 	}
 
@@ -44,15 +29,15 @@ export class CharactersComponent implements OnInit {
 
 	filters: IFilter;
 
-	page = 1
+	page = 1;
 
-	foundCharacters: ICharacter[] = []
+	foundCharacters: ICharacter[] = [];
 
-	queryName = ""
+	queryName = "";
 
-	markAll(turn = true) { 
+	markAll(turn = true) {
 		for (let field in this.filters) {
-			this.filters[field].enabled = turn
+			this.filters[field].enabled = turn;
 		}
 	}
 

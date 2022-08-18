@@ -14,19 +14,19 @@
 			{{ character.name }}
 		</div>
 		<div
-			*ngIf="filter.birthday.enabled"
+			*ngIf="filter.birthday"
 			class="minimalInCard flex items-center justify-center limitWidthForCells"
 		>
 			{{ character.birthday }}
 		</div>
 		<div
-			*ngIf="filter.nickname.enabled"
+			*ngIf="filter.nickname"
 			class="minimalInCard flex items-center justify-center limitWidthForCells"
 		>
 			{{ character.nickname }}
 		</div>
 		<div
-			*ngIf="filter.occupation.enabled"
+			*ngIf="filter.occupation"
 			class="minimalInCard flex items-center justify-center"
 		>
 			<ul>
@@ -39,13 +39,13 @@
 			</ul>
 		</div>
 		<div
-			*ngIf="filter.portrayed.enabled"
+			*ngIf="filter.portrayed"
 			class="minimalInCard flex items-center justify-center limitWidthForCells"
 		>
 			{{ character.portrayed }}
 		</div>
 		<div
-			*ngIf="filter.status.enabled"
+			*ngIf="filter.status"
 			class="minimalInCard flex items-center justify-center limitWidthForCells"
 		>
 			{{ character.status }}
