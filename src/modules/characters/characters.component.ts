@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, OnInit } from "@angular/core";
+import { ChangeDetectionStrategy, Component, OnDestroy, OnInit } from "@angular/core";
 import { Observable } from "rxjs";
 import { ICharacter, IFilter } from "src/models/character";
 import { CharacterService } from "./characters.service";
@@ -9,7 +9,7 @@ import { CharacterService } from "./characters.service";
 	styleUrls: ["./characters.component.css"],
 	changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class CharactersComponent implements OnInit {
+export class CharactersComponent implements OnInit, OnDestroy {
 	constructor(private characterService: CharacterService) {
 		let savedFilter = localStorage.getItem("filters");
 		this.filters = savedFilter
@@ -21,6 +21,9 @@ export class CharactersComponent implements OnInit {
 					status: true,
 					portrayed: true,
 			  };
+	}
+	ngOnDestroy(): void {
+		localStorage.setItem("filters", JSON.stringify(this.filters))
 	}
 
 	characters$!: Observable<ICharacter[]>;
@@ -37,7 +40,7 @@ export class CharactersComponent implements OnInit {
 
 	markAll(turn = true) {
 		for (let field in this.filters) {
-			this.filters[field].enabled = turn;
+			this.filters[field] = turn;
 		}
 	}
 
