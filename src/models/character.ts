@@ -12,25 +12,10 @@ export interface ICharacter {
 }
 
 export interface IFilter {
-	birthday: {
-		text: string;
-		enabled: boolean;
-	};
-	occupation: {
-		text: string;
-		enabled: boolean;
-	};
-	status: {
-		text: string;
-		enabled: boolean;
-	};
-	nickname: {
-		text: string;
-		enabled: boolean;
-	};
-	portrayed: {
-		text: string;
-		enabled: boolean;
-	};
-	[key: string]: any
+	birthday: boolean;
+	occupation: boolean;
+	status: boolean;
+	nickname: boolean;
+	portrayed: boolean;
+	[key: string]: any;
 }
