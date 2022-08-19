@@ -14,21 +14,37 @@
 			/>
 		</div>
 		<div class="text-2xl flex flex-col justify-center gap-10 willMoved">
-			<div>
-				{{ "hero.appearance" | i18nextEager
-				}}{{ character.appearance.join(", ") }}
+			<div class="flex">
+				<p class="mr-2 font-semibold">
+					{{ "hero.appearance" | i18nextEager }}
+				</p>
+				{{ character.appearance.join(", ") }}
 			</div>
-			<div>{{ "hero.born" | i18nextEager }}{{ character.birthday }}</div>
-			<div>
-				{{ "hero.nickname" | i18nextEager }}{{ character.nickname }}
+			<div class="flex">
+				<p class="mr-2 font-semibold">{{ "hero.born" | i18nextEager }}</p>
+				{{ character.birthday }}
 			</div>
-			<div>
-				{{ "hero.occupation" | i18nextEager }}
+			<div class="flex">
+				<p class="mr-2 font-semibold">
+					{{ "hero.nickname" | i18nextEager }}
+				</p>
+				{{ character.nickname }}
+			</div>
+			<div class="flex">
+				<p class="mr-2 font-semibold">
+					{{ "hero.occupation" | i18nextEager }}
+				</p>
 				{{ character.occupation.join(", ") }}
 			</div>
-			<div>{{ "hero.status" | i18nextEager }}{{ character.status }}</div>
-			<div>
-				{{ "hero.actor" | i18nextEager }}{{ character.portrayed }}
+			<div class="flex">
+				<p class="mr-2 font-semibold">{{ "hero.status" | i18nextEager }}</p>
+				{{ character.status }}
+			</div>
+			<div class="flex">
+				<p class="mr-2 font-semibold">
+					{{ "hero.actor" | i18nextEager }}
+				</p>
+				{{ character.portrayed }}
 			</div>
 			<div class="flex flex-wrap items-center addGap">
 				{{ "hero.tags" | i18nextEager }}

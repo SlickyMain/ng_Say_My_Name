@@ -15,19 +15,7 @@ export class SingleCharacterComponent implements OnInit {
 	@Input() filter!: IFilter;
 
 	goToDetails() {
-		this.router.navigate(["/person", this.character.char_id], {
-			queryParams: {
-				"char_id": this.character.char_id,
-				"appearance": this.character.appearance,
-				"birthday": this.character.birthday,
-				"img": this.character.img,
-				"name": this.character.name,
-				"nickname": this.character.nickname,
-				"occupation": this.character.occupation,
-				"portrayed": this.character.portrayed,
-				"status": this.character.status
-			}
-		})
+		this.router.navigate(["/person", this.character.char_id])
 	}
 
 	ngOnInit() {

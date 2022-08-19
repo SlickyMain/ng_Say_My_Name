@@ -1,4 +1,9 @@
-import { ChangeDetectionStrategy, Component, OnDestroy, OnInit } from "@angular/core";
+import {
+	ChangeDetectionStrategy,
+	Component,
+	OnDestroy,
+	OnInit,
+} from "@angular/core";
 import { Observable } from "rxjs";
 import { ICharacter, IFilter } from "src/models/character";
 import { CharacterService } from "./characters.service";
@@ -23,7 +28,7 @@ export class CharactersComponent implements OnInit, OnDestroy {
 			  };
 	}
 	ngOnDestroy(): void {
-		localStorage.setItem("filters", JSON.stringify(this.filters))
+		localStorage.setItem("filters", JSON.stringify(this.filters));
 	}
 
 	characters$!: Observable<ICharacter[]>;

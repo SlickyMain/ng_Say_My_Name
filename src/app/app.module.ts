@@ -12,6 +12,7 @@ import LanguageDetector from "i18next-browser-languagedetector";
 import Backend from "i18next-http-backend";
 import { NgxPaginationModule } from "ngx-pagination";
 import { HttpClientModule } from "@angular/common/http";
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 export function appInit(i18next: ITranslationService) {
 	return () =>
@@ -64,7 +65,8 @@ export const I18N_PROVIDERS = [
 		AppRoutingModule,
 		I18NextModule.forRoot(),
 		NgxPaginationModule,
-		HttpClientModule
+		HttpClientModule,
+  BrowserAnimationsModule
 	],
 	providers: [I18N_PROVIDERS],
 	bootstrap: [AppComponent],
