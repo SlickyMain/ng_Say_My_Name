@@ -1,5 +1,6 @@
-import { ChangeDetectorRef, Component, OnInit, ViewChild } from "@angular/core";
+import { Component, OnInit, ViewChild } from "@angular/core";
 import { ActivatedRoute } from "@angular/router";
+import { Observable, tap } from "rxjs";
 import { RefDirective } from "src/directives/Ref.directive";
 import { ICharacter } from "src/models/character";
 import { IFavorite } from "src/modules/favorite/favorite.component";
@@ -12,7 +13,11 @@ import { ModalComponent } from "../../components/modal/modal.component";
 	styleUrls: ["./characterDetails.component.css"],
 })
 export class CharacterDetailsComponent implements OnInit {
-	character!: ICharacter;
+	character$!: Observable<ICharacter>;
+
+	char_id!: number;
+
+	name!: string;
 
 	tags!: string[];
 
@@ -27,24 +32,26 @@ export class CharacterDetailsComponent implements OnInit {
 		});
 		component.instance.newTagEvent.subscribe((newTag: string) => {
 			this.tags.push(newTag);
-
-			// Favorite heroes
-			let selectedHeroes = localStorage.getItem("favor");
-			if (selectedHeroes) {
-				let parsedHeroes = JSON.parse(selectedHeroes);
-				if (parsedHeroes.hasOwnProperty(this.character.char_id)) {
-					parsedHeroes[this.character.char_id].tags.push(newTag);
+			// Favorite characters
+			let taggedCharacters = localStorage.getItem("favor");
+			if (taggedCharacters) {
+				let parsedTaggedCharacters = JSON.parse(taggedCharacters);
+				if (parsedTaggedCharacters.hasOwnProperty(this.char_id)) {
+					parsedTaggedCharacters[this.char_id].tags.push(newTag);
 				} else {
-					parsedHeroes[this.character.char_id] = {
-						name: this.character.name,
+					parsedTaggedCharacters[this.char_id] = {
+						name: this.name,
 						tags: [newTag],
 					};
 				}
-				localStorage.setItem("favor", JSON.stringify(parsedHeroes));
+				localStorage.setItem(
+					"favor",
+					JSON.stringify(parsedTaggedCharacters),
+				);
 			} else {
 				let newFavor = {
-					[this.character.char_id]: {
-						name: this.character.name,
+					[this.char_id]: {
+						name: this.name,
 						tags: [newTag],
 					},
 				};
@@ -69,24 +76,23 @@ export class CharacterDetailsComponent implements OnInit {
 		localStorage.setItem("favor", JSON.stringify(favor));
 	}
 
-	isString(value: any): boolean {
-		return typeof value === "string";
-	}
-
 	constructor(
 		private route: ActivatedRoute,
 		private charService: CharacterService,
 	) {
 		route.paramMap.subscribe(params => {
-			this.charService
+			this.character$ = this.charService
 				.getCharacterById(params.get("id") || "")
-				.subscribe(result => {
-					this.character = result[0];
-					let tagsExist = localStorage.getItem("favor");
-					this.tags = tagsExist
-						? JSON.parse(tagsExist)[result[0].char_id].tags
-						: [];
-				});
+				.pipe(
+					tap(res => {
+						this.char_id = res.char_id;
+						this.name = res.name;
+						let tagsExist = localStorage.getItem("favor");
+						this.tags = tagsExist
+							? JSON.parse(tagsExist)[res.char_id]?.tags || []
+							: [];
+					}),
+				);
 		});
 	}
 

@@ -1,23 +1,25 @@
 import { HttpClient } from "@angular/common/http";
 import { Injectable } from "@angular/core";
-import { Observable } from "rxjs";
+import { map, Observable } from "rxjs";
 import { ICharacter } from "src/models/character";
 
 @Injectable({
 	providedIn: "root",
 })
 export class CharacterService {
-	constructor(private fetch: HttpClient) {}
+	constructor(private http: HttpClient) {}
 
 	getAllCharacters(): Observable<ICharacter[]> {
-		return this.fetch.get<ICharacter[]>(
+		return this.http.get<ICharacter[]>(
 			"https://www.breakingbadapi.com/api/characters",
 		);
 	}
 
 	getCharacterById(id: string): Observable<ICharacter> {
-		return this.fetch.get<ICharacter>(
-			`https://www.breakingbadapi.com/api/characters/${id}`,
-		);
+		return this.http
+			.get<ICharacter>(
+				`https://www.breakingbadapi.com/api/characters/${id}`,
+			)
+			.pipe(map(res => res[0]));
 	}
 }
