@@ -6,13 +6,14 @@ import { SingleCharacterComponent } from "./components/singleCharacter/singleCha
 import { CharactersComponent } from "./characters.component";
 import { CharactersFilterPipePipe } from "src/pipes/charactersFilterPipe.pipe";
 import { CharacterDetailsComponent } from "./pages/characterDetails/characterDetails.component";
-import { RefDirective } from "src/directives/Ref.directive";
 import { I18NextModule } from "angular-i18next";
 import { NgxPaginationModule } from "ngx-pagination";
 import { registerLocaleData } from "@angular/common";
 import localeRu from "@angular/common/locales/ru";
-import { ModalComponent } from "./components/modal/modal.component";
 import { CharactersRoutesModule } from "./characters.routing.module";
+import { MatChipsModule } from "@angular/material/chips";
+import { MatFormFieldModule } from "@angular/material/form-field";
+import { MatIconModule } from "@angular/material/icon";
 
 registerLocaleData(localeRu);
 
@@ -23,15 +24,16 @@ registerLocaleData(localeRu);
 		FormsModule,
 		I18NextModule,
 		NgxPaginationModule,
-		CharactersRoutesModule
+		CharactersRoutesModule,
+		MatChipsModule,
+		MatFormFieldModule,
+		MatIconModule
 	],
 	declarations: [
 		CharactersFilterPipePipe,
 		CharactersComponent,
 		SingleCharacterComponent,
 		CharacterDetailsComponent,
-		RefDirective,
-		ModalComponent,
 	],
 })
 export class CharactersModule {}

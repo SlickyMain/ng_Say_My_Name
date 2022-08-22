@@ -1,11 +1,11 @@
 import { Component, OnInit, ViewChild } from "@angular/core";
 import { ActivatedRoute } from "@angular/router";
 import { Observable, tap } from "rxjs";
-import { RefDirective } from "src/directives/Ref.directive";
 import { ICharacter } from "src/models/character";
 import { IFavorite } from "src/modules/favorite/favorite.component";
 import { CharacterService } from "../../characters.service";
-import { ModalComponent } from "../../components/modal/modal.component";
+import { MatChipInputEvent } from "@angular/material/chips";
+import { COMMA, ENTER } from "@angular/cdk/keycodes";
 
 @Component({
 	selector: "app-characterDetails",
@@ -15,33 +15,28 @@ import { ModalComponent } from "../../components/modal/modal.component";
 export class CharacterDetailsComponent implements OnInit {
 	character$!: Observable<ICharacter>;
 
+	readonly separators = [ENTER, COMMA] as const;
+
 	char_id!: number;
 
 	name!: string;
 
 	tags!: string[];
 
-	@ViewChild(RefDirective) container!: RefDirective;
-
-	showModal() {
-		this.container.containerRef.clear();
-		const component =
-			this.container.containerRef.createComponent(ModalComponent);
-		component.instance.isNeedToDestroy.subscribe((close: boolean) => {
-			if (close) component.destroy();
-		});
-		component.instance.newTagEvent.subscribe((newTag: string) => {
-			this.tags.push(newTag);
+	addTag(event: MatChipInputEvent): void {
+		const value = (event.value || "").trim();
+		if (value) {
+			this.tags.push(value);
 			// Favorite characters
 			let taggedCharacters = localStorage.getItem("favor");
 			if (taggedCharacters) {
 				let parsedTaggedCharacters = JSON.parse(taggedCharacters);
 				if (parsedTaggedCharacters.hasOwnProperty(this.char_id)) {
-					parsedTaggedCharacters[this.char_id].tags.push(newTag);
+					parsedTaggedCharacters[this.char_id].tags.push(value);
 				} else {
 					parsedTaggedCharacters[this.char_id] = {
 						name: this.name,
-						tags: [newTag],
+						tags: [value],
 					};
 				}
 				localStorage.setItem(
@@ -52,13 +47,13 @@ export class CharacterDetailsComponent implements OnInit {
 				let newFavor = {
 					[this.char_id]: {
 						name: this.name,
-						tags: [newTag],
+						tags: [value],
 					},
 				};
 				localStorage.setItem("favor", JSON.stringify(newFavor));
 			}
-			component.destroy();
-		});
+		}
+		event.chipInput.clear();
 	}
 
 	deleteTag(tag: string) {
