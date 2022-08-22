@@ -1,16 +1,14 @@
 <div>
 	<div class="flex justify-between px-5 items-center pt-2 relative">
 		<nav class="flex items-center gap-2">
-			<p class="font-semibold text-2xl pt-2 ml-5">
-				Breaking Bad Library
-			</p>
+			<p class="font-semibold text-2xl pt-2 ml-5">Breaking Bad Library</p>
 			<a
 				class="bg-sky-500 rounded py-2 px-3 text-white"
 				routerLinkActive="activeLink"
 				ariaCurrentWhenActive="page"
 				[routerLinkActiveOptions]="{ exact: true }"
 				routerLink="/"
-				>{{"main_page" | i18nextEager}}</a
+				>{{ "main_page" | i18nextEager }}</a
 			>
 			<a
 				class="bg-sky-500 rounded py-2 px-3 text-white"
@@ -18,7 +16,7 @@
 				ariaCurrentWhenActive="page"
 				[routerLinkActiveOptions]="{ exact: true }"
 				routerLink="/favorite"
-				>{{"favorite_page" | i18nextEager}}</a
+				>{{ "favorite_page" | i18nextEager }}</a
 			>
 		</nav>
 		<button
@@ -37,7 +35,7 @@
 				hideSwitcher: viewWidth < 900,
 				showSwitcher: viewWidth < 900 && isMenuOpen
 			}"
-			class="flex gap-2 relative"
+			class="flex gap-2 relative z-10"
 		>
 			<div
 				(click)="isMenuOpen = !isMenuOpen"
@@ -61,7 +59,7 @@
 			<button
 				[ngClass]="{ 'bg-blue-600': !isRu() }"
 				(click)="setLang('en')"
-				class="bg-sky-500 rounded py-2 px-3 mr-5 text-white"
+				class="bg-sky-500 rounded py-2 px-3 text-white"
 			>
 				English
 			</button>

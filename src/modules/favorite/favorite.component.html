@@ -1,38 +1,41 @@
-<div class="flex justify-center flex-col items-center gap-2">
-	<div class="flex flex-col relative">
-		<div
-			(click)="showFilters = !showFilters"
-			[ngClass]="{ addLightGrey: showFilters }"
-			class="flex justify-center"
-		>
-			<p class="openTagFilter">{{"select_filters" | i18nextEager}}</p>
-		</div>
-		<div *ngIf="showFilters" class="tagFilters flex flex-col">
-			<ng-container *ngFor="let field of possibleFilters | keyvalue">
-				<label
-					class="filterPoint"
-					(click)="toggleTag(field.key)"
+<div class="flex px-5 justify-center flex-col items-start gap-2">
+	<div class="flex flex-col relative pl-4">
+		<mat-form-field>
+			<mat-label>{{ "select_filters" | i18nextEager }}</mat-label>
+			<mat-select [formControl]="tagsControl" multiple>
+				<mat-option
+					*ngFor="let tag of possibleFilters | keyvalue"
+					(click)="toggleTag(tag.key)"
+					[value]="tag.key"
+					>{{ tag.key }}</mat-option
 				>
-					<input
-						type="checkbox"
-						[(ngModel)]="possibleFilters[field.key]"
-					/>
-					{{ field.key }}
-				</label>
-			</ng-container>
-		</div>
+			</mat-select>
+		</mat-form-field>
 	</div>
-	<ng-container *ngFor="let hero of favoriteHeroes | keyvalue" >
-		<div *ngIf="checkInter(hero.value.tags)" class="m-1">
-			<a
-				[routerLink]="['/person', hero.key]"
-				class="p-2 bg-sky-400 rounded flex"
-			>
-				{{ hero.value.name }}:
-				<div class="ml-2 bg-pink-400 px-2 rounded">
-					{{ hero.value.tags.join(", ") }}
-				</div>
-			</a>
-		</div>
-	</ng-container>
+	<mat-list role="list" class="w-11/12">
+		<ng-container *ngFor="let character of favoriteCharacters | keyvalue">
+			<div *ngIf="checkInter(character.value.tags)">
+				<mat-list-item role="listitem">
+					<a
+						[routerLink]="['/person', character.key]"
+						class="font-bold text-blue-700 mr-1 min-w-fit"
+					>
+						{{ character.value.name }}
+					</a>
+					<div class="w-full">
+						(
+						<ng-container
+							*ngFor="
+								let tag of character.value.tags;
+								let isLast = last
+							"
+						>
+							{{ isLast ? tag : tag + ", " }}
+						</ng-container>
+						)
+					</div>
+				</mat-list-item>
+			</div>
+		</ng-container>
+	</mat-list>
 </div>

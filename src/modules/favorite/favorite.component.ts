@@ -1,4 +1,5 @@
 import { Component, OnInit } from "@angular/core";
+import { FormControl } from "@angular/forms";
 
 export interface IFavorite {
 	[key: number | string]: {
@@ -17,17 +18,19 @@ interface ITagFilter {
 	styleUrls: ["./favorite.component.css"],
 })
 export class FavoriteComponent implements OnInit {
-	favoriteHeroes: IFavorite;
+	favoriteCharacters: IFavorite;
 
 	possibleFilters: ITagFilter = {};
 
 	showFilters = false;
 
+	tagsControl = new FormControl("")
+
 	tags: string[] = [];
 
-	checkInter(heroTags: string[]) {
+	checkInter(charTags: string[]) {
 		if (!this.tags.length) return true
-		return heroTags.filter(x => this.tags.includes(x.toLowerCase())).length > 0
+		return charTags.filter(x => this.tags.includes(x.toLowerCase())).length > 0
 	}
 
 	toggleTag(tag: string) {
@@ -42,12 +45,12 @@ export class FavoriteComponent implements OnInit {
 
 	constructor() {
 		let isExist = localStorage.getItem("favor");
-		this.favoriteHeroes = isExist ? JSON.parse(isExist) : {};
+		this.favoriteCharacters = isExist ? JSON.parse(isExist) : {};
 	}
 
 	ngOnInit() {
-		for (let field in this.favoriteHeroes) {
-			for (let tags of this.favoriteHeroes[field].tags) {
+		for (let field in this.favoriteCharacters) {
+			for (let tags of this.favoriteCharacters[field].tags) {
 				this.possibleFilters[tags] = false;
 			}
 		}
