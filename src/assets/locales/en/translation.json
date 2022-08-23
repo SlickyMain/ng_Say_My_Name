@@ -23,5 +23,6 @@
     },
     "add": "Add",
     "close": "Close",
-    "select_filters": "Aplly some filters"
+    "select_filters": "Aplly some filters",
+    "menu": "Menu"
 }

@@ -12,7 +12,14 @@ import LanguageDetector from "i18next-browser-languagedetector";
 import Backend from "i18next-http-backend";
 import { NgxPaginationModule } from "ngx-pagination";
 import { HttpClientModule } from "@angular/common/http";
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
+import { NavigationComponent } from "./navigation/navigation.component";
+import { LayoutModule } from "@angular/cdk/layout";
+import { MatToolbarModule } from "@angular/material/toolbar";
+import { MatButtonModule } from "@angular/material/button";
+import { MatSidenavModule } from "@angular/material/sidenav";
+import { MatIconModule } from "@angular/material/icon";
+import { MatListModule } from "@angular/material/list";
 
 export function appInit(i18next: ITranslationService) {
 	return () =>
@@ -59,14 +66,20 @@ export const I18N_PROVIDERS = [
 ];
 
 @NgModule({
-	declarations: [AppComponent],
+	declarations: [AppComponent, NavigationComponent],
 	imports: [
 		BrowserModule,
 		AppRoutingModule,
 		I18NextModule.forRoot(),
 		NgxPaginationModule,
 		HttpClientModule,
-  BrowserAnimationsModule
+		BrowserAnimationsModule,
+		LayoutModule,
+		MatToolbarModule,
+		MatButtonModule,
+		MatSidenavModule,
+		MatIconModule,
+		MatListModule,
 	],
 	providers: [I18N_PROVIDERS],
 	bootstrap: [AppComponent],

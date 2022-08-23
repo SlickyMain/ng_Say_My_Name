@@ -1,75 +1,77 @@
-<div class="w-full mt-1 flex justify-center">
+<div class="mainCont">
 	<div class="w-full mt-1 flex justify-center">
-		<input
-			type="text"
-			class="border py-1 px-2 w-6/12"
-			placeholder="{{ 'search_hero_placeholder' | i18nextEager }}"
-			[(ngModel)]="queryName"
-		/>
-	</div>
-</div>
-<div class="w-full flex flex-col items-center justify-center mb-1">
-	<button
-		[ngClass]="{ 'rounded-b-none': filtersOpen }"
-		class="w-9/12 mt-4 flex justify-center bg-blue-400 hover:bg-blue-800 rounded px-3 py-1.5 text-white"
-		(click)="filtersOpen = !filtersOpen"
-	>
-		<p>{{ "set_view" | i18nextEager }}</p>
-	</button>
-	<div
-		*ngIf="filtersOpen"
-		class="w-9/12 flex flex-row flex-wrap justify-center items-center border mb-4 py-3 rounded rounded-t-none"
-	>
-		<label
-			*ngFor="let field of filters | keyvalue"
-			class="mr-4 flex justify-center items-center"
-		>
-			{{ field.key | i18nextEager }}
+		<div class="w-full mt-1 flex justify-center">
 			<input
-				class="ml-1"
-				type="checkbox"
-				[(ngModel)]="filters[field.key]"
+				type="text"
+				class="border py-1 px-2 w-6/12"
+				placeholder="{{ 'search_hero_placeholder' | i18nextEager }}"
+				[(ngModel)]="queryName"
 			/>
-		</label>
-		<button
-			class="flex justify-center bg-blue-400 hover:bg-blue-800 rounded p-3 text-white"
-			(click)="markAll(true)"
-		>
-			{{ "mark_all" | i18nextEager }}
-		</button>
-		<button
-			class="flex justify-center bg-blue-400 hover:bg-blue-800 rounded p-3 text-white ml-3"
-			(click)="markAll(false)"
-		>
-			{{ "dismiss_all" | i18nextEager }}
-		</button>
+		</div>
 	</div>
-</div>
-<div
-	class="flex flex-col justify-center items-start overflow-scroll contentHere"
->
-	<div class="flex flex-row namesOfCells">
-		<div class="min200px text-center">{{ "image" | i18nextEager }}</div>
-		<div class="min200px text-center">{{ "name" | i18nextEager }}</div>
-		<ng-container *ngFor="let field of filters | keyvalue">
-			<div *ngIf="field.value" class="min200px text-center">
+	<div class="w-full flex flex-col items-center justify-center mb-1">
+		<button
+			[ngClass]="{ 'rounded-b-none': filtersOpen }"
+			class="w-9/12 mt-4 flex justify-center bg-blue-400 hover:bg-blue-800 rounded px-3 py-1.5 text-white"
+			(click)="filtersOpen = !filtersOpen"
+		>
+			<p>{{ "set_view" | i18nextEager }}</p>
+		</button>
+		<div
+			*ngIf="filtersOpen"
+			class="w-9/12 flex flex-row flex-wrap justify-center items-center border mb-4 py-3 rounded rounded-t-none"
+		>
+			<label
+				*ngFor="let field of filters | keyvalue"
+				class="mr-4 flex justify-center items-center"
+			>
 				{{ field.key | i18nextEager }}
-			</div>
-		</ng-container>
+				<input
+					class="ml-1"
+					type="checkbox"
+					[(ngModel)]="filters[field.key]"
+				/>
+			</label>
+			<button
+				class="flex justify-center bg-blue-400 hover:bg-blue-800 rounded p-3 text-white"
+				(click)="markAll(true)"
+			>
+				{{ "mark_all" | i18nextEager }}
+			</button>
+			<button
+				class="flex justify-center bg-blue-400 hover:bg-blue-800 rounded p-3 text-white ml-3"
+				(click)="markAll(false)"
+			>
+				{{ "dismiss_all" | i18nextEager }}
+			</button>
+		</div>
 	</div>
-	<div *ngIf="characters$ | async as heroes" class="andHere">
-		<app-singleCharacter
-			*ngFor="
-				let character of heroes
-					| charactersFilterPipe: queryName
-					| paginate: { itemsPerPage: 10, currentPage: page }
-			"
-			[character]="character"
-			[filter]="filters"
-		>
-		</app-singleCharacter>
+	<div
+		class="flex flex-col justify-center items-start overflow-scroll contentHere"
+	>
+		<div class="flex flex-row namesOfCells">
+			<div class="min200px text-center">{{ "image" | i18nextEager }}</div>
+			<div class="min200px text-center">{{ "name" | i18nextEager }}</div>
+			<ng-container *ngFor="let field of filters | keyvalue">
+				<div *ngIf="field.value" class="min200px text-center">
+					{{ field.key | i18nextEager }}
+				</div>
+			</ng-container>
+		</div>
+		<div *ngIf="characters$ | async as heroes" class="andHere">
+			<app-singleCharacter
+				*ngFor="
+					let character of heroes
+						| charactersFilterPipe: queryName
+						| paginate: { itemsPerPage: 10, currentPage: page }
+				"
+				[character]="character"
+				[filter]="filters"
+			>
+			</app-singleCharacter>
+		</div>
 	</div>
-</div>
-<div class="flex items-center justify-center">
-	<pagination-controls (pageChange)="page = $event"></pagination-controls>
+	<div class="flex items-center justify-center">
+		<pagination-controls (pageChange)="page = $event"></pagination-controls>
+	</div>
 </div>
