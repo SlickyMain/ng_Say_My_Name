@@ -1,51 +1,52 @@
 <div class="mainCont">
-	<div class="w-full mt-1 flex justify-center">
-		<div class="w-full mt-1 flex justify-center">
-			<input
-				type="text"
-				class="border py-1 px-2 w-6/12"
-				placeholder="{{ 'search_hero_placeholder' | i18nextEager }}"
-				[(ngModel)]="queryName"
-			/>
-		</div>
+	<!-- Search panel -->
+	<div class="w-full mt-3 flex justify-center">
+		<mat-form-field class="w-7/12" appearance="fill">
+			<mat-label class="text-black">{{
+				"search_hero_placeholder" | i18nextEager
+			}}</mat-label>
+			<input [(ngModel)]="queryName" matInput />
+		</mat-form-field>
 	</div>
+
+	<!-- Filters -->
 	<div class="w-full flex flex-col items-center justify-center mb-1">
-		<button
-			[ngClass]="{ 'rounded-b-none': filtersOpen }"
-			class="w-9/12 mt-4 flex justify-center bg-blue-400 hover:bg-blue-800 rounded px-3 py-1.5 text-white"
-			(click)="filtersOpen = !filtersOpen"
-		>
-			<p>{{ "set_view" | i18nextEager }}</p>
-		</button>
-		<div
-			*ngIf="filtersOpen"
-			class="w-9/12 flex flex-row flex-wrap justify-center items-center border mb-4 py-3 rounded rounded-t-none"
-		>
-			<label
-				*ngFor="let field of filters | keyvalue"
-				class="mr-4 flex justify-center items-center"
-			>
-				{{ field.key | i18nextEager }}
-				<input
-					class="ml-1"
-					type="checkbox"
-					[(ngModel)]="filters[field.key]"
-				/>
-			</label>
-			<button
-				class="flex justify-center bg-blue-400 hover:bg-blue-800 rounded p-3 text-white"
-				(click)="markAll(true)"
-			>
-				{{ "mark_all" | i18nextEager }}
-			</button>
-			<button
-				class="flex justify-center bg-blue-400 hover:bg-blue-800 rounded p-3 text-white ml-3"
-				(click)="markAll(false)"
-			>
-				{{ "dismiss_all" | i18nextEager }}
-			</button>
-		</div>
+		<mat-accordion class="w-6/12">
+			<mat-expansion-panel>
+				<mat-expansion-panel-header>
+					<mat-panel-title>
+						{{ "set_view" | i18nextEager }}
+					</mat-panel-title>
+				</mat-expansion-panel-header>
+				<div
+					class="w-full flex flex-row flex-wrap justify-center items-center"
+				>
+					<mat-checkbox
+						*ngFor="let field of filters | keyvalue"
+						class="mr-4 flex justify-center items-center"
+						color="primary"
+						[(ngModel)]="filters[field.key]"
+					>
+						{{ field.key | i18nextEager }}
+					</mat-checkbox>
+					<button
+						class="flex justify-center items-center bg-blue-400 hover:bg-blue-800 rounded p-2 text-white"
+						(click)="markAll(true)"
+					>
+						{{ "mark_all" | i18nextEager }}
+					</button>
+					<button
+						class="flex justify-center items-center bg-blue-400 hover:bg-blue-800 rounded p-2 text-white ml-3"
+						(click)="markAll(false)"
+					>
+						{{ "dismiss_all" | i18nextEager }}
+					</button>
+				</div>
+			</mat-expansion-panel>
+		</mat-accordion>
 	</div>
+
+	<!-- Content -->
 	<div
 		class="flex flex-col justify-center items-start overflow-scroll contentHere"
 	>
@@ -59,6 +60,79 @@
 			</ng-container>
 		</div>
 		<div *ngIf="characters$ | async as heroes" class="andHere">
+			<!-- <table mat-table [dataSource]="heroes">
+				<ng-container matColumnDef="img">
+					<th mat-header-cell *matHeaderCellDef>
+						{{ "image" | i18nextEager }}
+					</th>
+					<td mat-cell *matCellDef="let element">
+						<img
+							width="200"
+							height="150"
+							class="rounded"
+							src="{{ element.img }}"
+							alt="{{ element.name }}"
+						/>
+					</td>
+				</ng-container>
+
+				<ng-container matColumnDef="name">
+					<th mat-header-cell *matHeaderCellDef>
+						{{ "name" | i18nextEager }}
+					</th>
+					<td mat-cell *matCellDef="let element">
+						{{ element.name }}
+					</td>
+				</ng-container>
+
+				<ng-container matColumnDef="birthday">
+					<th mat-header-cell *matHeaderCellDef>
+						{{ "birthday" | i18nextEager }}
+					</th>
+					<td mat-cell *matCellDef="let element">
+						{{ element.birthday }}
+					</td>
+				</ng-container>
+
+				<ng-container matColumnDef="nickname">
+					<th mat-header-cell *matHeaderCellDef>
+						{{ "nickname" | i18nextEager }}
+					</th>
+					<td mat-cell *matCellDef="let element">
+						{{ element.nickname }}
+					</td>
+				</ng-container>
+
+				<ng-container matColumnDef="occupation">
+					<th mat-header-cell *matHeaderCellDef>
+						{{ "occupation" | i18nextEager }}
+					</th>
+					<td mat-cell *matCellDef="let element">
+						{{ element.occupation }}
+					</td>
+				</ng-container>
+
+				<ng-container matColumnDef="portrayed">
+					<th mat-header-cell *matHeaderCellDef>
+						{{ "portrayed" | i18nextEager }}
+					</th>
+					<td mat-cell *matCellDef="let element">
+						{{ element.portrayed }}
+					</td>
+				</ng-container>
+
+				<ng-container matColumnDef="status">
+					<th mat-header-cell *matHeaderCellDef>
+						{{ "status" | i18nextEager }}
+					</th>
+					<td mat-cell *matCellDef="let element">
+						{{ element.status }}
+					</td>
+				</ng-container>
+
+				<tr mat-header-row *matHeaderRowDef="filters"></tr>
+				<tr mat-row *matRowDef="let row; columns: filters"></tr>
+			</table> -->
 			<app-singleCharacter
 				*ngFor="
 					let character of heroes

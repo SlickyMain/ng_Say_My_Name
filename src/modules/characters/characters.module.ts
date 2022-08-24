@@ -14,6 +14,10 @@ import { CharactersRoutesModule } from "./characters.routing.module";
 import { MatChipsModule } from "@angular/material/chips";
 import { MatFormFieldModule } from "@angular/material/form-field";
 import { MatIconModule } from "@angular/material/icon";
+import { MatInputModule } from "@angular/material/input";
+import { MatExpansionModule } from "@angular/material/expansion";
+import { MatCheckboxModule } from "@angular/material/checkbox";
+import { MatTableModule } from "@angular/material/table";
 
 registerLocaleData(localeRu);
 
@@ -27,7 +31,11 @@ registerLocaleData(localeRu);
 		CharactersRoutesModule,
 		MatChipsModule,
 		MatFormFieldModule,
-		MatIconModule
+		MatIconModule,
+		MatInputModule,
+		MatExpansionModule,
+		MatCheckboxModule,
+		MatTableModule,
 	],
 	declarations: [
 		CharactersFilterPipePipe,
