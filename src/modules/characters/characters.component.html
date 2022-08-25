@@ -50,7 +50,7 @@
 	<div
 		class="flex flex-col justify-center items-start overflow-scroll contentHere"
 	>
-		<div class="flex flex-row namesOfCells">
+		<!-- <div class="flex flex-row namesOfCells">
 			<div class="min200px text-center">{{ "image" | i18nextEager }}</div>
 			<div class="min200px text-center">{{ "name" | i18nextEager }}</div>
 			<ng-container *ngFor="let field of filters | keyvalue">
@@ -58,9 +58,20 @@
 					{{ field.key | i18nextEager }}
 				</div>
 			</ng-container>
-		</div>
+		</div> -->
+		<!-- <app-singleCharacter
+			*ngFor="
+				let character of heroes
+					| charactersFilterPipe: queryName
+					| paginate: { itemsPerPage: 10, currentPage: page }
+			"
+			[character]="character"
+			[filter]="filters"
+		>
+		</app-singleCharacter> -->
 		<div *ngIf="characters$ | async as heroes" class="andHere">
-			<!-- <table mat-table [dataSource]="heroes">
+			<!-- UGLY TABLE AAAAAAAAAAAAAAAA -->
+			<table mat-table [dataSource]="heroes">
 				<ng-container matColumnDef="img">
 					<th mat-header-cell *matHeaderCellDef>
 						{{ "image" | i18nextEager }}
@@ -86,7 +97,11 @@
 				</ng-container>
 
 				<ng-container matColumnDef="birthday">
-					<th mat-header-cell *matHeaderCellDef>
+					<th
+						mat-header-cell
+						*matHeaderCellDef
+						[hidden]="!filters.birthday"
+					>
 						{{ "birthday" | i18nextEager }}
 					</th>
 					<td mat-cell *matCellDef="let element">
@@ -130,19 +145,9 @@
 					</td>
 				</ng-container>
 
-				<tr mat-header-row *matHeaderRowDef="filters"></tr>
-				<tr mat-row *matRowDef="let row; columns: filters"></tr>
-			</table> -->
-			<app-singleCharacter
-				*ngFor="
-					let character of heroes
-						| charactersFilterPipe: queryName
-						| paginate: { itemsPerPage: 10, currentPage: page }
-				"
-				[character]="character"
-				[filter]="filters"
-			>
-			</app-singleCharacter>
+				<tr mat-header-row *matHeaderRowDef="getColumns()"></tr>
+				<tr mat-row *matRowDef="let row; columns: getColumns()"></tr>
+			</table>
 		</div>
 	</div>
 	<div class="flex items-center justify-center">

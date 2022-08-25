@@ -18,6 +18,7 @@ import { MatInputModule } from "@angular/material/input";
 import { MatExpansionModule } from "@angular/material/expansion";
 import { MatCheckboxModule } from "@angular/material/checkbox";
 import { MatTableModule } from "@angular/material/table";
+import { MatSortModule } from "@angular/material/sort";
 
 registerLocaleData(localeRu);
 
@@ -36,6 +37,7 @@ registerLocaleData(localeRu);
 		MatExpansionModule,
 		MatCheckboxModule,
 		MatTableModule,
+		MatSortModule,
 	],
 	declarations: [
 		CharactersFilterPipePipe,
