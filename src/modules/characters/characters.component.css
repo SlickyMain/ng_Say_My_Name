@@ -43,10 +43,15 @@
 }
 
 .mat-cell {
-    text-align: center;
-    word-break: break-all;
-    padding: 0px 5px;
-} 
+	text-align: center;
+	word-break: break-all;
+	padding: 5px;
+}
+
+.mat-row:hover {
+	background-color: lightgray;
+	cursor: pointer;
+}
 
 .min200px {
 	min-width: 200px;

@@ -1,13 +1,4 @@
 <div class="mainCont">
-	<!-- Search panel -->
-	<div class="w-full mt-3 flex justify-center">
-		<mat-form-field class="w-7/12" appearance="fill">
-			<mat-label class="text-black">{{
-				"search_hero_placeholder" | i18nextEager
-			}}</mat-label>
-			<input [(ngModel)]="queryField" #search matInput />
-		</mat-form-field>
-	</div>
 
 	<!-- Filters -->
 	<div class="w-full flex flex-col items-center justify-center mb-1">
@@ -69,8 +60,8 @@
 			[filter]="filters"
 		>
 		</app-singleCharacter> -->
-		<div *ngIf="characters" class="andHere">
-			<table mat-table [dataSource]="characters">
+		<div class="andHere">
+			<table *ngIf="characters.data.length > 0" mat-table [dataSource]="characters">
 				<ng-container matColumnDef="img">
 					<th mat-header-cell *matHeaderCellDef>
 						{{ "image" | i18nextEager }}
@@ -145,7 +136,7 @@
 				</ng-container>
 
 				<tr mat-header-row class="namesOfCells" *matHeaderRowDef="getColumns()"></tr>
-				<tr mat-row *matRowDef="let row; columns: getColumns()"></tr>
+				<tr (click)="redirect(row)" mat-row *matRowDef="let row; columns: getColumns()"></tr>
 			</table>
 			<mat-paginator
 				[pageSizeOptions]="[5, 10, 20]"

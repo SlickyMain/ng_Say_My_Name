@@ -24,5 +24,7 @@
     "add": "Add",
     "close": "Close",
     "select_filters": "Aplly some filters",
-    "menu": "Menu"
+    "menu": "Menu",
+    "navigation": "Pages",
+    "locales": "Languages"
 }

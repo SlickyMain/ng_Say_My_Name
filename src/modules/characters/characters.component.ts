@@ -12,23 +12,19 @@ import { CharacterService } from "./characters.service";
 import { Sort } from "@angular/material/sort";
 import { MatTableDataSource } from "@angular/material/table";
 import { MatPaginator } from "@angular/material/paginator";
-import {
-	fromEvent,
-	debounce,
-	scan,
-	interval,
-	switchMap,
-	Subscription,
-} from "rxjs";
+import { fromEvent, debounce, interval, Subscription } from "rxjs";
+import { Router } from "@angular/router";
 
 @Component({
 	selector: "app-search",
 	templateUrl: "./characters.component.html",
 	styleUrls: ["./characters.component.css"],
-	changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class CharactersComponent implements OnInit, OnDestroy, AfterViewInit {
-	constructor(private characterService: CharacterService) {
+	constructor(
+		private characterService: CharacterService,
+		private router: Router,
+	) {
 		let savedFilter = localStorage.getItem("filters");
 		this.filters = savedFilter
 			? JSON.parse(savedFilter)
@@ -44,20 +40,20 @@ export class CharactersComponent implements OnInit, OnDestroy, AfterViewInit {
 
 	characters = new MatTableDataSource<ICharacter>();
 	@ViewChild("paginator") paginator!: MatPaginator;
-	pageSizeByDefault = 5
+	pageSizeByDefault = 5;
 
 	filtersOpen = false;
 	filters: IFilter;
 	onlyKeysOfFilters: string[];
 
-	@ViewChild("search") search!: ElementRef;
-	queryField = "";
-	inputs!: Subscription;
-
 	markAll(turn = true) {
 		for (let field in this.filters) {
 			this.filters[field] = turn;
 		}
+	}
+
+	redirect(character: ICharacter) {
+		this.router.navigate([`person/${character.char_id}`]);
 	}
 
 	getColumns() {
@@ -76,7 +72,12 @@ export class CharactersComponent implements OnInit, OnDestroy, AfterViewInit {
 		// 	0,
 		// 	this.characters,
 		// );
-		this.characterService.getAllCharacters(this.characters)
+		this.characterService.getAllCharacters().subscribe(data => {
+			this.characters.data = data || []
+		});
+		this.characterService.dataStream$.subscribe(data => {
+			this.characters.data = data
+		})
 	}
 
 	ngOnDestroy(): void {
@@ -84,16 +85,8 @@ export class CharactersComponent implements OnInit, OnDestroy, AfterViewInit {
 	}
 
 	ngAfterViewInit(): void {
-		this.paginator.pageSize = this.pageSizeByDefault
+		this.paginator.pageSize = this.pageSizeByDefault;
 		this.characters.paginator = this.paginator;
-		this.inputs = fromEvent(this.search.nativeElement, "input")
-			.pipe(debounce(() => interval(300)))
-			.subscribe(() => {
-				this.characterService.getCharacterByName(
-					this.search.nativeElement.value,
-					this.characters,
-				);
-			});
 	}
 }
 

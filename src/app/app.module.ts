@@ -21,6 +21,10 @@ import { MatSidenavModule } from "@angular/material/sidenav";
 import { MatIconModule } from "@angular/material/icon";
 import { MatListModule } from "@angular/material/list";
 import { RootApiService } from "./rootApi.service";
+import { MatSnackBarModule } from "@angular/material/snack-bar";
+import { MatFormFieldModule } from "@angular/material/form-field";
+import { FormsModule } from "@angular/forms";
+import { MatInputModule } from "@angular/material/input";
 
 export function appInit(i18next: ITranslationService) {
 	return () =>
@@ -81,6 +85,10 @@ export const I18N_PROVIDERS = [
 		MatSidenavModule,
 		MatIconModule,
 		MatListModule,
+		MatSnackBarModule,
+		MatFormFieldModule,
+		FormsModule,
+		MatInputModule,
 	],
 	providers: [I18N_PROVIDERS, RootApiService],
 	bootstrap: [AppComponent],

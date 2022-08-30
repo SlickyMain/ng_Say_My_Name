@@ -3,8 +3,8 @@
     padding: 0px 10px;
 }
 
-.openTagFilter::after {
-    content: "↓";
+.incHeight {
+    height: 90vh;
 }
 
 .addLightGrey {
