@@ -1,13 +1,25 @@
 import {
+	AfterViewInit,
 	ChangeDetectionStrategy,
 	Component,
+	ElementRef,
 	OnDestroy,
 	OnInit,
+	ViewChild,
 } from "@angular/core";
-import { Observable } from "rxjs";
 import { ICharacter, IFilter } from "src/models/character";
 import { CharacterService } from "./characters.service";
 import { Sort } from "@angular/material/sort";
+import { MatTableDataSource } from "@angular/material/table";
+import { MatPaginator } from "@angular/material/paginator";
+import {
+	fromEvent,
+	debounce,
+	scan,
+	interval,
+	switchMap,
+	Subscription,
+} from "rxjs";
 
 @Component({
 	selector: "app-search",
@@ -15,7 +27,7 @@ import { Sort } from "@angular/material/sort";
 	styleUrls: ["./characters.component.css"],
 	changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class CharactersComponent implements OnInit, OnDestroy {
+export class CharactersComponent implements OnInit, OnDestroy, AfterViewInit {
 	constructor(private characterService: CharacterService) {
 		let savedFilter = localStorage.getItem("filters");
 		this.filters = savedFilter
@@ -30,19 +42,17 @@ export class CharactersComponent implements OnInit, OnDestroy {
 		this.onlyKeysOfFilters = Object.keys(this.filters);
 	}
 
-	characters$!: Observable<ICharacter[]>;
+	characters = new MatTableDataSource<ICharacter>();
+	@ViewChild("paginator") paginator!: MatPaginator;
+	pageSizeByDefault = 5
 
 	filtersOpen = false;
-
 	filters: IFilter;
-
 	onlyKeysOfFilters: string[];
 
-	page = 1;
-
-	foundCharacters: ICharacter[] = [];
-
-	queryName = "";
+	@ViewChild("search") search!: ElementRef;
+	queryField = "";
+	inputs!: Subscription;
 
 	markAll(turn = true) {
 		for (let field in this.filters) {
@@ -60,38 +70,30 @@ export class CharactersComponent implements OnInit, OnDestroy {
 		return columns;
 	}
 
-	// sortData(sort: Sort) {
-	// 	const data = this.desserts.slice();
-	// 	if (!sort.active || sort.direction === "") {
-	// 		this.sortedData = data;
-	// 		return;
-	// 	}
-
-	// 	this.sortedData = data.sort((a, b) => {
-	// 		const isAsc = sort.direction === "asc";
-	// 		switch (sort.active) {
-	// 			case "name":
-	// 				return compare(a.name, b.name, isAsc);
-	// 			case "calories":
-	// 				return compare(a.calories, b.calories, isAsc);
-	// 			case "fat":
-	// 				return compare(a.fat, b.fat, isAsc);
-	// 			case "carbs":
-	// 				return compare(a.carbs, b.carbs, isAsc);
-	// 			case "protein":
-	// 				return compare(a.protein, b.protein, isAsc);
-	// 			default:
-	// 				return 0;
-	// 		}
-	// 	});
-	// }
-
 	ngOnInit() {
-		this.characters$ = this.characterService.getAllCharacters();
+		// this.characterService.getPaginatedCharacters(
+		// 	this.pageSizeByDefault,
+		// 	0,
+		// 	this.characters,
+		// );
+		this.characterService.getAllCharacters(this.characters)
 	}
 
 	ngOnDestroy(): void {
 		localStorage.setItem("filters", JSON.stringify(this.filters));
+	}
+
+	ngAfterViewInit(): void {
+		this.paginator.pageSize = this.pageSizeByDefault
+		this.characters.paginator = this.paginator;
+		this.inputs = fromEvent(this.search.nativeElement, "input")
+			.pipe(debounce(() => interval(300)))
+			.subscribe(() => {
+				this.characterService.getCharacterByName(
+					this.search.nativeElement.value,
+					this.characters,
+				);
+			});
 	}
 }
 

@@ -1,41 +1,66 @@
 .contentHere {
-    height: calc(100vh - 200px);
+	height: calc(100vh - 200px);
 }
 
 .getBuisButton {
-    height: fit-content;
-    width: fit-content;
-    border-radius: 7px;
-    padding: 50px;
-    font-size: 32px;
-    color: white;
+	height: fit-content;
+	width: fit-content;
+	border-radius: 7px;
+	padding: 50px;
+	font-size: 32px;
+	color: white;
 }
 
 .andHere {
-    max-height: 65vh;
+	max-height: 65vh;
+	overflow-y: scroll;
+}
+
+.paginator {
+	position: absolute;
+	width: 100%;
+	display: flex;
+	justify-content: center;
+	bottom: 0;
+	right: 0;
 }
 
 .namesOfCells {
-    position: sticky;
-    top: 0;
-    padding-bottom: 10px;
-    box-shadow: -9px 9px 20px 10px rgba(255, 255, 255, 1);
-    background-color: white;
+	position: sticky;
+	top: 0;
+	padding-bottom: 10px;
+	background-color: white;
 }
 
+.mat-column-img,
+.mat-column-name,
+.mat-column-birthday,
+.mat-column-nickname,
+.mat-column-occupation,
+.mat-column-status,
+.mat-column-portrayed {
+	text-align: center;
+}
+
+.mat-cell {
+    text-align: center;
+    word-break: break-all;
+    padding: 0px 5px;
+} 
+
 .min200px {
-    min-width: 200px;
+	min-width: 200px;
 }
 
 .min150px {
-    min-width: 60px;
+	min-width: 60px;
 }
 
 @media screen and (min-width: 1400px) {
-    .contentHere {
-        align-items: center;
-    }
-    .andHere {
-        max-height: 70vh;
-    }
+	.contentHere {
+		align-items: center;
+	}
+	.andHere {
+		max-height: 70vh;
+	}
 }

@@ -7,7 +7,6 @@ import { CharactersComponent } from "./characters.component";
 import { CharactersFilterPipePipe } from "src/pipes/charactersFilterPipe.pipe";
 import { CharacterDetailsComponent } from "./pages/characterDetails/characterDetails.component";
 import { I18NextModule } from "angular-i18next";
-import { NgxPaginationModule } from "ngx-pagination";
 import { registerLocaleData } from "@angular/common";
 import localeRu from "@angular/common/locales/ru";
 import { CharactersRoutesModule } from "./characters.routing.module";
@@ -18,6 +17,7 @@ import { MatInputModule } from "@angular/material/input";
 import { MatExpansionModule } from "@angular/material/expansion";
 import { MatCheckboxModule } from "@angular/material/checkbox";
 import { MatTableModule } from "@angular/material/table";
+import { MatPaginatorModule } from "@angular/material/paginator";
 import { MatSortModule } from "@angular/material/sort";
 
 registerLocaleData(localeRu);
@@ -28,7 +28,6 @@ registerLocaleData(localeRu);
 		HttpClientModule,
 		FormsModule,
 		I18NextModule,
-		NgxPaginationModule,
 		CharactersRoutesModule,
 		MatChipsModule,
 		MatFormFieldModule,
@@ -38,6 +37,7 @@ registerLocaleData(localeRu);
 		MatCheckboxModule,
 		MatTableModule,
 		MatSortModule,
+		MatPaginatorModule,
 	],
 	declarations: [
 		CharactersFilterPipePipe,

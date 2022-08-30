@@ -20,6 +20,7 @@ import { MatButtonModule } from "@angular/material/button";
 import { MatSidenavModule } from "@angular/material/sidenav";
 import { MatIconModule } from "@angular/material/icon";
 import { MatListModule } from "@angular/material/list";
+import { RootApiService } from "./rootApi.service";
 
 export function appInit(i18next: ITranslationService) {
 	return () =>
@@ -81,7 +82,7 @@ export const I18N_PROVIDERS = [
 		MatIconModule,
 		MatListModule,
 	],
-	providers: [I18N_PROVIDERS],
+	providers: [I18N_PROVIDERS, RootApiService],
 	bootstrap: [AppComponent],
 })
 export class AppModule {}
