@@ -25,7 +25,6 @@ export class NavigationComponent implements AfterViewInit {
 		);
 
 	@ViewChild("search") search!: ElementRef;
-	queryField = "";
 	inputs!: Subscription;
 
 	setLang(lang: string): void {

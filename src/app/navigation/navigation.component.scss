@@ -18,16 +18,28 @@
 }
 
 .spaceClass {
-	flex: 1 1 auto
+	flex: 1 1 auto;
 }
 
 .activeLink {
-	background-color: #38BDF8;
+	background-color: #38bdf8;
 	color: white;
 }
 
 .hidden {
 	display: none;
+}
+
+::ng-deep 
+
+.fieldContainer {
+	min-width: 50px;
+	max-width: 300px;
+	width: 100%;
+	margin-top: 1px;
+	margin-left: 10px;
+	background-color: transparent;
+	font-size: 14px;
 }
 
 @media screen and (max-width: 400px) {

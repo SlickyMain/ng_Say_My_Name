@@ -61,7 +61,7 @@
 	min-width: 60px;
 }
 
-@media screen and (min-width: 1400px) {
+@media screen and (min-width: 1200px) {
 	.contentHere {
 		align-items: center;
 	}

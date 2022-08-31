@@ -10,7 +10,6 @@ import {
 } from "angular-i18next";
 import LanguageDetector from "i18next-browser-languagedetector";
 import Backend from "i18next-http-backend";
-import { NgxPaginationModule } from "ngx-pagination";
 import { HttpClientModule } from "@angular/common/http";
 import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
 import { NavigationComponent } from "./navigation/navigation.component";
@@ -76,7 +75,6 @@ export const I18N_PROVIDERS = [
 		BrowserModule,
 		AppRoutingModule,
 		I18NextModule.forRoot(),
-		NgxPaginationModule,
 		HttpClientModule,
 		BrowserAnimationsModule,
 		LayoutModule,

@@ -85,13 +85,16 @@
 					>{{ "favorite_page" | i18nextEager }}</a
 				>
 			</ng-container>
+
 			<!-- Search panel -->
-			<mat-form-field class="" appearance="fill">
-				<mat-label class="text-black">{{
-					"search_hero_placeholder" | i18nextEager
-				}}</mat-label>
-				<input [(ngModel)]="queryField" #search matInput />
-			</mat-form-field>
+			<div class="fieldContainer">
+				<mat-form-field class="w-full" appearance="standard">
+					<mat-label class="text-white">{{
+						"search_hero_placeholder" | i18nextEager
+					}}</mat-label>
+					<input #search matInput />
+				</mat-form-field>
+			</div>
 			<span class="spaceClass"></span>
 			<div *ngIf="(isHandset$ | async) === false">
 				<button

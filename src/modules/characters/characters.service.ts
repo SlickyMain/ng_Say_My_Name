@@ -1,5 +1,4 @@
-import { EventEmitter, Injectable } from "@angular/core";
-import { MatTableDataSource } from "@angular/material/table";
+import { Injectable } from "@angular/core";
 import { BehaviorSubject, catchError, map, Observable, startWith } from "rxjs";
 import { RootApiService } from "src/app/rootApi.service";
 import { ICharacter } from "src/models/character";
@@ -13,13 +12,15 @@ export class CharacterService {
 	constructor(
 		private rootApi: RootApiService,
 		private snackBar: MatSnackBar,
-	) {}
+	) {
+		this.getAllCharacters();
+	}
 
-	sharedDataSourse = new BehaviorSubject<ICharacter[]>([])
-	dataStream$ = this.sharedDataSourse.asObservable()
+	sharedDataSourse = new BehaviorSubject<ICharacter[]>([]);
+	dataStream$ = this.sharedDataSourse.asObservable();
 
 	getAllCharacters() {
-		return this.rootApi
+		this.rootApi
 			.knockToServer<ICharacter[]>("characters")
 			.pipe(
 				startWith(null),
@@ -28,23 +29,18 @@ export class CharacterService {
 					return [];
 				}),
 			)
+			.subscribe(data => this.sharedDataSourse.next(data || []));
 	}
 
-	getPaginatedCharacters(
-		limit: number,
-		offset: number,
-		dataSource: MatTableDataSource<ICharacter>,
-	) {
+	getPaginatedCharacters(limit: number, offset: number) {
 		this.rootApi
 			.knockToServer<ICharacter[]>(
 				`characters?limit=${limit}&offset=${offset}`,
 			)
-			.subscribe(data => (dataSource.data = data));
+			.subscribe(data => this.sharedDataSourse.next(data));
 	}
 
-	getCharacterByName(
-		queryString: string,
-	) {
+	getCharacterByName(queryString: string) {
 		queryString = queryString.replace(" ", "+");
 		this.rootApi
 			.knockToServer<ICharacter[]>(`characters?name=${queryString}`)
@@ -55,8 +51,8 @@ export class CharacterService {
 				}),
 			)
 			.subscribe(data => {
-				this.sharedDataSourse.next(data)
-			})
+				this.sharedDataSourse.next(data);
+			});
 	}
 
 	getCharacterById(id: string): Observable<ICharacter> {
@@ -70,11 +66,19 @@ export class CharacterService {
 	}
 
 	handleError(err: HttpErrorResponse) {
-		this.snackBar.open(
-			`An Error occured: ${err.error.error.message}`,
-			"Close",
-			{ duration: 4000 },
-		);
+		if (err.status === 0 && err.error instanceof ProgressEvent) {
+			this.snackBar.open(
+				`An Error occured: ${err.statusText}`,
+				"Close",
+				{ duration: 4000 },
+			);
+		} else {
+			this.snackBar.open(
+				`An Error occured: ${err.error.error.message}`,
+				"Close",
+				{ duration: 4000 },
+			);
+		}
 		console.log(err);
 	}
 }
